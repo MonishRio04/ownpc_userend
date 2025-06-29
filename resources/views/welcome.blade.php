@@ -64,9 +64,11 @@
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between py-4">
+            <div class="flex items-center justify-between ">
                 <!-- Logo -->
-                <a href="#" class="font-['Pacifico'] text-2xl text-primary">logo</a>
+                <a href="#" class="font-['Pacifico'] text-2xl text-primary">
+                   <img class="h-[70px]" src="{{asset( \App\Models\SiteSetting::find(1)->logo)}}" alt=""> 
+                </a>
                 
                 <!-- Navigation -->
                 <nav class="hidden md:flex space-x-8">
