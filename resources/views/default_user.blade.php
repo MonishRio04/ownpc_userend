@@ -61,7 +61,9 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
     @include('header')
-    @yield('content')
+    <div class="min-h-screen">
+        @yield('content')
+    </div>
     @include('footer')
 </body>
 </html>

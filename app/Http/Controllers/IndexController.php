@@ -15,5 +15,9 @@ class IndexController extends Controller
         return view("welcome",$data);
     }
 
-    // public vfunctio
+    public function CategoryWiseProduct($id, $slug){
+        $data['products'] = Product::where('category_id', $id)->where('status', 1)->get();
+        $data['category'] = Category::find($id);        
+        return view("categorywise_product", $data);
+    }
 }

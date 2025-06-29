@@ -136,7 +136,7 @@
                         </div>
                         {{-- <p class="text-gray-600 mb-4">{{ $category->description ?? 'Explore top builds and products in this category.' }}</p> --}}
                         <div class="flex space-x-3">
-                            <a href="{{ url('category', $category->id) }}" class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer text-center">View Category</a>
+                            <a href="{{ url('category', $category->id) }}/{{$category->category_slug}}" class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer text-center">View Category</a>
                         </div>
                     </div>
                 </div>
