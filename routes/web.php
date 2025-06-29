@@ -2,10 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
+<<<<<<< HEAD
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [IndexController::class, "Index"]);
+=======
+use Illuminate\Support\Facades\Auth;
+
+Route::get('/', [IndexController::class,"Index"]);
+>>>>>>> 14208a36ac021d4849210bd5791b9c56f19628ea
 
 Auth::routes();
 
