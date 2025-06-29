@@ -10,5 +10,3 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 }
-
-return view('default', ['withoutHeader' => true, 'withoutFooter' => true]);
