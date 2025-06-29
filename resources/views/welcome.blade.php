@@ -233,106 +233,26 @@
                 <!-- Gaming PC -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
                     <div class="h-64 overflow-hidden">
-                        <img src="https://readdy.ai/api/search-image?query=high-end%20gaming%20PC%20with%20RGB%20lighting%2C%20glass%20case%2C%20powerful%20graphics%20card%2C%20professional%20product%20photography%20with%20dramatic%20lighting%2C%20dark%20background%20with%20red%20accent%20lighting%2C%20ultra-detailed%20components&width=400&height=300&seq=124&orientation=landscape" alt="Gaming PC" class="w-full h-full object-cover">
+                        <img src="{{asset($category->category_image)}}" alt="Gaming PC" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6">
-                        @dd($category)
                         <div class="flex justify-between items-center mb-3">
-                            <h3 class="text-xl font-semibold">{{$category->category_name}}</h3>
-                            <span class="bg-red-500 text-white text-xs px-2 py-1 rounded">Gaming</span>
+                            <h3 class="text-xl font-semibold">{{ $category->category_name }}</h3>
+                            {{-- <span class="bg-primary text-white text-xs px-2 py-1 rounded">{{ $category->tag ?? 'Category' }}</span> --}}
                         </div>
-                        <p class="text-gray-600 mb-4">Dominate every game with this high-performance build featuring the latest RTX 4080 GPU and Intel Core i9 processor.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-2xl font-bold text-primary">$2,499</span>
-                            <div class="flex text-yellow-400 text-sm">
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-half-fill"></i>
-                                <span class="text-gray-500 ml-1">(128)</span>
-                            </div>
-                        </div>
+                        {{-- <p class="text-gray-600 mb-4">{{ $category->description ?? 'Explore top builds and products in this category.' }}</p> --}}
                         <div class="flex space-x-3">
-                            <button class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer">View Build</button>
-                            <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-50 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
-                                <div class="w-5 h-5 flex items-center justify-center">
-                                    <i class="ri-heart-line"></i>
-                                </div>
-                            </button>
+                            <a href="{{ url('category', $category->id) }}" class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer text-center">View Category</a>
                         </div>
                     </div>
                 </div>
                 @endforeach
-                
-                <!-- Workstation PC -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">                  
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-3">
-                            <h3 class="text-xl font-semibold">Pro Workstation</h3>
-                            <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded">Workstation</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">Engineered for content creators and professionals with AMD Ryzen Threadripper and NVIDIA RTX A5000.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-2xl font-bold text-primary">$3,799</span>
-                            <div class="flex text-yellow-400 text-sm">
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <span class="text-gray-500 ml-1">(86)</span>
-                            </div>
-                        </div>
-                        <div class="flex space-x-3">
-                            <button class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer">View Build</button>
-                            <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-50 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
-                                <div class="w-5 h-5 flex items-center justify-center">
-                                    <i class="ri-heart-line"></i>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Budget PC -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                    <div class="h-64 overflow-hidden">
-                        <img src="https://readdy.ai/api/search-image?query=compact%20budget%20gaming%20PC%20with%20clean%20design%2C%20small%20form%20factor%2C%20modest%20components%2C%20professional%20product%20photography%20with%20bright%20lighting%2C%20white%20background%20with%20green%20accent%20lighting%2C%20neat%20cable%20management&width=400&height=300&seq=126&orientation=landscape" alt="Budget PC" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-3">
-                            <h3 class="text-xl font-semibold">Budget Gamer</h3>
-                            <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">Budget</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">Perfect entry-level gaming PC with AMD Ryzen 5 and RTX 3060, offering excellent performance at an affordable price.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-2xl font-bold text-primary">$899</span>
-                            <div class="flex text-yellow-400 text-sm">
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-line"></i>
-                                <span class="text-gray-500 ml-1">(215)</span>
-                            </div>
-                        </div>
-                        <div class="flex space-x-3">
-                            <button class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer">View Build</button>
-                            <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-50 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
-                                <div class="w-5 h-5 flex items-center justify-center">
-                                    <i class="ri-heart-line"></i>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- PC Builder Section -->
-    <section id="pc-builder" class="py-16 bg-white">
+    {{-- <section id="pc-builder" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold mb-2 text-center">Custom PC Builder</h2>
             <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">Select each component to build your perfect PC. Our configurator ensures all parts are compatible and optimized for your needs.</p>
@@ -690,6 +610,13 @@
                 </div>
             </div>
         </div>
+    </section> --}}
+<section id="pc-builder" class="py-32 bg-white flex items-center justify-center">
+        <div class="text-center">
+            <h2 class="text-4xl font-bold mb-4 text-gray-800">Custom PC Builder</h2>
+            <p class="text-lg text-gray-600 mb-8">This feature is coming soon. Stay tuned for updates!</p>
+            <span class="inline-block bg-primary text-white px-6 py-3 rounded-button font-semibold text-xl animate-pulse">Coming Soon</span>
+        </div>
     </section>
 
     <!-- Why Choose Us Section -->
@@ -747,10 +674,10 @@
                     </div>
                     <p class="text-gray-700 mb-6">"The custom PC I ordered exceeded all my expectations. The build quality is exceptional, and the performance is incredible. I'm now able to play all my favorite games at max settings without any issues."</p>
                     <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        {{-- <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div> --}}
                         <div>
-                            <h4 class="font-medium">Michael Rodriguez</h4>
-                            <p class="text-sm text-gray-600">Gaming Enthusiast</p>
+                            <h4 class="font-medium">Monish</h4>
+                            <p class="text-sm text-gray-600">Software Developer</p>
                         </div>
                     </div>
                 </div>
@@ -765,10 +692,11 @@
                     </div>
                     <p class="text-gray-700 mb-6">"As a video editor, I needed a powerful workstation that could handle 4K video editing without breaking a sweat. The custom PC I built with their help has cut my rendering times in half. Worth every penny!"</p>
                     <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                        <div>
-                            <h4 class="font-medium">Samantha Wilson</h4>
-                            <p class="text-sm text-gray-600">Professional Video Editor</p>
+                        {{-- <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        --}}
+                        <div> 
+                            <h4 class="font-medium">Prasanth</h4>
+                            <p class="text-sm text-gray-600">Professional Editor</p>
                         </div>
                     </div>
                 </div>
@@ -783,9 +711,10 @@
                     </div>
                     <p class="text-gray-700 mb-6">"I was hesitant to build a custom PC, but their configurator made it so easy. The customer service was outstanding, and they helped me choose components that fit my budget while still delivering great performance."</p>
                     <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        {{-- <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        --}}
                         <div>
-                            <h4 class="font-medium">David Thompson</h4>
+                            <h4 class="font-medium">David</h4>
                             <p class="text-sm text-gray-600">First-time PC Builder</p>
                         </div>
                     </div>
