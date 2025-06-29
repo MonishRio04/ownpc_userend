@@ -49,7 +49,7 @@ use App\Models\SiteSetting;
 */
 
 // Home page 
-Route::get('/', [IndexController::class, 'Index']);
+Route::get('/', [\App\Http\Controllers\IndexController::class, 'Index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard');
