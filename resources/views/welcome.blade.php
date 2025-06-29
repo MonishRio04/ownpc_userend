@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
     <style>
         :where([class^="ri-"])::before { content: "\f3c2"; }
+        html{
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Inter', sans-serif;
         }
