@@ -994,7 +994,7 @@
                     backToTopButton.classList.add('opacity-0', 'invisible');
                     backToTopButton.classList.remove('opacity-100', 'visible');
                 }
-            });
+            });  
             
             backToTopButton.addEventListener('click', function() {
                 window.scrollTo({
