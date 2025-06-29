@@ -121,7 +121,7 @@
         </div>
     </section>
 
-    <!-- Featured Builds Section -->
+    {{-- <!-- Featured Builds Section -->
     <section class="py-16">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold mb-8 text-center">Featured Custom Builds</h2>
@@ -158,6 +158,112 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Workstation PC -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">                  
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="text-xl font-semibold">Pro Workstation</h3>
+                            <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded">Workstation</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Engineered for content creators and professionals with AMD Ryzen Threadripper and NVIDIA RTX A5000.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-primary">$3,799</span>
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <span class="text-gray-500 ml-1">(86)</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer">View Build</button>
+                            <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-50 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
+                                <div class="w-5 h-5 flex items-center justify-center">
+                                    <i class="ri-heart-line"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Budget PC -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=compact%20budget%20gaming%20PC%20with%20clean%20design%2C%20small%20form%20factor%2C%20modest%20components%2C%20professional%20product%20photography%20with%20bright%20lighting%2C%20white%20background%20with%20green%20accent%20lighting%2C%20neat%20cable%20management&width=400&height=300&seq=126&orientation=landscape" alt="Budget PC" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="text-xl font-semibold">Budget Gamer</h3>
+                            <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">Budget</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Perfect entry-level gaming PC with AMD Ryzen 5 and RTX 3060, offering excellent performance at an affordable price.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-primary">$899</span>
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-line"></i>
+                                <span class="text-gray-500 ml-1">(215)</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer">View Build</button>
+                            <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-50 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
+                                <div class="w-5 h-5 flex items-center justify-center">
+                                    <i class="ri-heart-line"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> --}}
+     <!-- Featured Builds Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-8 text-center">Categories</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                @foreach ($categories as $category)
+                <!-- Gaming PC -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=high-end%20gaming%20PC%20with%20RGB%20lighting%2C%20glass%20case%2C%20powerful%20graphics%20card%2C%20professional%20product%20photography%20with%20dramatic%20lighting%2C%20dark%20background%20with%20red%20accent%20lighting%2C%20ultra-detailed%20components&width=400&height=300&seq=124&orientation=landscape" alt="Gaming PC" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        @dd($category)
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="text-xl font-semibold">{{$category->category_name}}</h3>
+                            <span class="bg-red-500 text-white text-xs px-2 py-1 rounded">Gaming</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Dominate every game with this high-performance build featuring the latest RTX 4080 GPU and Intel Core i9 processor.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-primary">$2,499</span>
+                            <div class="flex text-yellow-400 text-sm">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-half-fill"></i>
+                                <span class="text-gray-500 ml-1">(128)</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer">View Build</button>
+                            <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-50 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
+                                <div class="w-5 h-5 flex items-center justify-center">
+                                    <i class="ri-heart-line"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
                 
                 <!-- Workstation PC -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">                  
