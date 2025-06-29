@@ -2,11 +2,17 @@
 
 namespace App\Models;
 
+<<<<<<< HEAD
+=======
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+>>>>>>> origin/main
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+<<<<<<< HEAD
+    //
+=======
     use HasFactory;
 
     protected $guarded = [];
@@ -26,4 +32,5 @@ class Product extends Model
     public function brand(){
         return $this->belongsTo(Brand::class,'brand_id','id');
     }
+>>>>>>> origin/main
 }
