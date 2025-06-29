@@ -2,9 +2,12 @@
 
 
 
-     
+@extends('layouts.app') {{-- Use your layout file name --}}
+
+  
 @extends('default')
 @section('content')
+
     
     <!-- Hero Section -->
     <section class="hero-section relative">
@@ -49,7 +52,9 @@
                             </div>
                         </div>
                         <div class="flex space-x-3">
-                            <button class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer">View Build</button>
+                             <a href="/build/1" class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap text-center">
+                                View Build  
+                                </a>
                             <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-50 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
                                 <div class="w-5 h-5 flex items-center justify-center">
                                     <i class="ri-heart-line"></i>
@@ -82,7 +87,9 @@
                             </div>
                         </div>
                         <div class="flex space-x-3">
-                            <button class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer">View Build</button>
+                             <a href="/build/2" class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap text-center">
+                                View Build
+                                </a>
                             <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-50 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
                                 <div class="w-5 h-5 flex items-center justify-center">
                                     <i class="ri-heart-line"></i>
@@ -115,7 +122,9 @@
                             </div>
                         </div>
                         <div class="flex space-x-3">
-                            <button class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer">View Build</button>
+                             <a href="/build/1" class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap text-center">
+                                    View Build
+                                    </a>
                             <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-50 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
                                 <div class="w-5 h-5 flex items-center justify-center">
                                     <i class="ri-heart-line"></i>
