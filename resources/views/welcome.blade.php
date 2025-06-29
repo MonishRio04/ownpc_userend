@@ -1,113 +1,5 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head><script src="https://static.readdy.ai/static/e.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom PC Builder</title>
-    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-    <script>tailwind.config={theme:{extend:{colors:{primary:'#3B82F6',secondary:'#10B981'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
-    <style>
-        :where([class^="ri-"])::before { content: "\f3c2"; }
-        html{
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .hero-section {
-            background-image: url('https://readdy.ai/api/search-image?query=modern%20gaming%20PC%20with%20RGB%20lighting%2C%20glass%20case%2C%20high-end%20components%2C%20professional%20product%20photography%20with%20dramatic%20lighting%2C%20dark%20background%20with%20blue%20and%20purple%20accent%20lighting%2C%20ultra-detailed%20components%2C%20clean%20cable%20management%2C%20premium%20build%20quality&width=1280&height=600&seq=123&orientation=landscape');
-            background-size: cover;
-            background-position: center;
-        }
-        .component-card:hover {
-            transform: translateY(-5px);
-            transition: all 0.3s ease;
-        }
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        .custom-range {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 6px;
-            border-radius: 5px;
-            background: #e5e7eb;
-            outline: none;
-        }
-        .custom-range::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: #3B82F6;
-            cursor: pointer;
-        }
-        .custom-range::-moz-range-thumb {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: #3B82F6;
-            cursor: pointer;
-            border: none;
-        }
-    </style>
-</head>
-<body class="bg-gray-50 text-gray-800">
-    <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between ">
-                <!-- Logo -->
-                <a href="#" class="font-['Pacifico'] text-2xl text-primary">
-                   <img class="h-[70px]" src="{{asset( \App\Models\SiteSetting::find(1)->logo)}}" alt=""> 
-                </a>
-                
-                <!-- Navigation -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#" class="text-primary font-medium">Home</a>
-                    <a href="#" class="text-gray-700 font-medium hover:text-primary transition-colors">PC Builder</a>
-                    <a href="#" class="text-gray-700 font-medium hover:text-primary transition-colors">Pre-Built PCs</a>
-                    <a href="#" class="text-gray-700 font-medium hover:text-primary transition-colors">Components</a>
-                    <a href="#" class="text-gray-700 font-medium hover:text-primary transition-colors">Deals</a>
-                    <a href="#" class="text-gray-700 font-medium hover:text-primary transition-colors">Support</a>
-                </nav>
-                
-                <!-- Right Icons -->
-                <div class="flex items-center space-x-6">
-                    <a href="#" class="text-gray-700 hover:text-primary">
-                        <div class="w-6 h-6 flex items-center justify-center">
-                            <i class="ri-search-line ri-lg"></i>
-                        </div>
-                    </a>
-                    <a href="#" class="text-gray-700 hover:text-primary">
-                        <div class="w-6 h-6 flex items-center justify-center">
-                            <i class="ri-user-line ri-lg"></i>
-                        </div>
-                    </a>
-                    <a href="#" class="text-gray-700 hover:text-primary relative">
-                        <div class="w-6 h-6 flex items-center justify-center">
-                            <i class="ri-shopping-cart-line ri-lg"></i>
-                        </div>
-                        <span class="absolute -top-2 -right-2 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">2</span>
-                    </a>
-                    <button class="md:hidden text-gray-700">
-                        <div class="w-6 h-6 flex items-center justify-center">
-                            <i class="ri-menu-line ri-lg"></i>
-                        </div>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
+    @extends('default_user')
+    @section('content')
     <!-- Hero Section -->
     <section class="hero-section relative">
         <div class="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/40"></div>
@@ -117,7 +9,7 @@
                 <p class="text-white/90 text-lg mb-8">Customize every component to create the perfect PC for your needs. From gaming rigs to workstations, we've got you covered with premium parts and expert guidance.</p>
                 <div class="flex flex-wrap gap-4">
                     <a href="#pc-builder" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-primary/90 transition-colors !rounded-button whitespace-nowrap cursor-pointer">Start Building</a>
-                    <a href="#" class="bg-white text-gray-900 px-6 py-3 rounded-button font-medium hover:bg-gray-100 transition-colors !rounded-button whitespace-nowrap cursor-pointer">Explore Pre-Built PCs</a>
+                    {{-- <a href="#" class="bg-white text-gray-900 px-6 py-3 rounded-button font-medium hover:bg-gray-100 transition-colors !rounded-button whitespace-nowrap cursor-pointer">Explore Pre-Built PCs</a> --}}
                 </div>
             </div>
         </div>
@@ -235,106 +127,26 @@
                 <!-- Gaming PC -->
                 <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
                     <div class="h-64 overflow-hidden">
-                        <img src="https://readdy.ai/api/search-image?query=high-end%20gaming%20PC%20with%20RGB%20lighting%2C%20glass%20case%2C%20powerful%20graphics%20card%2C%20professional%20product%20photography%20with%20dramatic%20lighting%2C%20dark%20background%20with%20red%20accent%20lighting%2C%20ultra-detailed%20components&width=400&height=300&seq=124&orientation=landscape" alt="Gaming PC" class="w-full h-full object-cover">
+                        <img src="{{asset($category->category_image)}}" alt="Gaming PC" class="w-full h-full object-cover">
                     </div>
                     <div class="p-6">
-                        @dd($category)
                         <div class="flex justify-between items-center mb-3">
-                            <h3 class="text-xl font-semibold">{{$category->category_name}}</h3>
-                            <span class="bg-red-500 text-white text-xs px-2 py-1 rounded">Gaming</span>
+                            <h3 class="text-xl font-semibold">{{ $category->category_name }}</h3>
+                            {{-- <span class="bg-primary text-white text-xs px-2 py-1 rounded">{{ $category->tag ?? 'Category' }}</span> --}}
                         </div>
-                        <p class="text-gray-600 mb-4">Dominate every game with this high-performance build featuring the latest RTX 4080 GPU and Intel Core i9 processor.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-2xl font-bold text-primary">$2,499</span>
-                            <div class="flex text-yellow-400 text-sm">
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-half-fill"></i>
-                                <span class="text-gray-500 ml-1">(128)</span>
-                            </div>
-                        </div>
+                        {{-- <p class="text-gray-600 mb-4">{{ $category->description ?? 'Explore top builds and products in this category.' }}</p> --}}
                         <div class="flex space-x-3">
-                            <button class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer">View Build</button>
-                            <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-50 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
-                                <div class="w-5 h-5 flex items-center justify-center">
-                                    <i class="ri-heart-line"></i>
-                                </div>
-                            </button>
+                            <a href="{{ url('category', $category->id) }}" class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer text-center">View Category</a>
                         </div>
                     </div>
                 </div>
                 @endforeach
-                
-                <!-- Workstation PC -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">                  
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-3">
-                            <h3 class="text-xl font-semibold">Pro Workstation</h3>
-                            <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded">Workstation</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">Engineered for content creators and professionals with AMD Ryzen Threadripper and NVIDIA RTX A5000.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-2xl font-bold text-primary">$3,799</span>
-                            <div class="flex text-yellow-400 text-sm">
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <span class="text-gray-500 ml-1">(86)</span>
-                            </div>
-                        </div>
-                        <div class="flex space-x-3">
-                            <button class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer">View Build</button>
-                            <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-50 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
-                                <div class="w-5 h-5 flex items-center justify-center">
-                                    <i class="ri-heart-line"></i>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Budget PC -->
-                <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300">
-                    <div class="h-64 overflow-hidden">
-                        <img src="https://readdy.ai/api/search-image?query=compact%20budget%20gaming%20PC%20with%20clean%20design%2C%20small%20form%20factor%2C%20modest%20components%2C%20professional%20product%20photography%20with%20bright%20lighting%2C%20white%20background%20with%20green%20accent%20lighting%2C%20neat%20cable%20management&width=400&height=300&seq=126&orientation=landscape" alt="Budget PC" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mb-3">
-                            <h3 class="text-xl font-semibold">Budget Gamer</h3>
-                            <span class="bg-green-500 text-white text-xs px-2 py-1 rounded">Budget</span>
-                        </div>
-                        <p class="text-gray-600 mb-4">Perfect entry-level gaming PC with AMD Ryzen 5 and RTX 3060, offering excellent performance at an affordable price.</p>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="text-2xl font-bold text-primary">$899</span>
-                            <div class="flex text-yellow-400 text-sm">
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-fill"></i>
-                                <i class="ri-star-line"></i>
-                                <span class="text-gray-500 ml-1">(215)</span>
-                            </div>
-                        </div>
-                        <div class="flex space-x-3">
-                            <button class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90 transition-colors flex-1 !rounded-button whitespace-nowrap cursor-pointer">View Build</button>
-                            <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-50 transition-colors !rounded-button whitespace-nowrap cursor-pointer">
-                                <div class="w-5 h-5 flex items-center justify-center">
-                                    <i class="ri-heart-line"></i>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- PC Builder Section -->
-    <section id="pc-builder" class="py-16 bg-white">
+    {{-- <section id="pc-builder" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold mb-2 text-center">Custom PC Builder</h2>
             <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">Select each component to build your perfect PC. Our configurator ensures all parts are compatible and optimized for your needs.</p>
@@ -692,6 +504,13 @@
                 </div>
             </div>
         </div>
+    </section> --}}
+<section id="pc-builder" class="py-32 bg-white flex items-center justify-center">
+        <div class="text-center">
+            <h2 class="text-4xl font-bold mb-4 text-gray-800">Custom PC Builder</h2>
+            <p class="text-lg text-gray-600 mb-8">This feature is coming soon. Stay tuned for updates!</p>
+            <span class="inline-block bg-primary text-white px-6 py-3 rounded-button font-semibold text-xl animate-pulse">Coming Soon</span>
+        </div>
     </section>
 
     <!-- Why Choose Us Section -->
@@ -749,10 +568,10 @@
                     </div>
                     <p class="text-gray-700 mb-6">"The custom PC I ordered exceeded all my expectations. The build quality is exceptional, and the performance is incredible. I'm now able to play all my favorite games at max settings without any issues."</p>
                     <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        {{-- <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div> --}}
                         <div>
-                            <h4 class="font-medium">Michael Rodriguez</h4>
-                            <p class="text-sm text-gray-600">Gaming Enthusiast</p>
+                            <h4 class="font-medium">Monish</h4>
+                            <p class="text-sm text-gray-600">Software Developer</p>
                         </div>
                     </div>
                 </div>
@@ -767,10 +586,11 @@
                     </div>
                     <p class="text-gray-700 mb-6">"As a video editor, I needed a powerful workstation that could handle 4K video editing without breaking a sweat. The custom PC I built with their help has cut my rendering times in half. Worth every penny!"</p>
                     <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                        <div>
-                            <h4 class="font-medium">Samantha Wilson</h4>
-                            <p class="text-sm text-gray-600">Professional Video Editor</p>
+                        {{-- <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        --}}
+                        <div> 
+                            <h4 class="font-medium">Prasanth</h4>
+                            <p class="text-sm text-gray-600">Professional Editor</p>
                         </div>
                     </div>
                 </div>
@@ -785,9 +605,10 @@
                     </div>
                     <p class="text-gray-700 mb-6">"I was hesitant to build a custom PC, but their configurator made it so easy. The customer service was outstanding, and they helped me choose components that fit my budget while still delivering great performance."</p>
                     <div class="flex items-center">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        {{-- <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        --}}
                         <div>
-                            <h4 class="font-medium">David Thompson</h4>
+                            <h4 class="font-medium">David</h4>
                             <p class="text-sm text-gray-600">First-time PC Builder</p>
                         </div>
                     </div>
@@ -878,146 +699,4 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white pt-16 pb-8">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-                <div>
-                    <a href="#" class="font-['Pacifico'] text-2xl text-white mb-4 inline-block">logo</a>
-                    <p class="text-gray-400 mb-4">Custom PC building made simple. Quality components, expert assembly, and exceptional performance.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <div class="w-6 h-6 flex items-center justify-center">
-                                <i class="ri-facebook-fill"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <div class="w-6 h-6 flex items-center justify-center">
-                                <i class="ri-twitter-x-fill"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <div class="w-6 h-6 flex items-center justify-center">
-                                <i class="ri-instagram-fill"></i>
-                            </div>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <div class="w-6 h-6 flex items-center justify-center">
-                                <i class="ri-youtube-fill"></i>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Products</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Custom PCs</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Gaming PCs</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Workstations</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Components</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Accessories</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Support</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">FAQs</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Warranty</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Shipping</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Returns</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <div class="w-5 h-5 flex items-center justify-center mr-2 text-gray-400">
-                                <i class="ri-map-pin-line"></i>
-                            </div>
-                            <span class="text-gray-400">123 Tech Street, Silicon Valley, CA 94043</span>
-                        </li>
-                        <li class="flex items-center">
-                            <div class="w-5 h-5 flex items-center justify-center mr-2 text-gray-400">
-                                <i class="ri-phone-line"></i>
-                            </div>
-                            <span class="text-gray-400">(800) 123-4567</span>
-                        </li>
-                        <li class="flex items-center">
-                            <div class="w-5 h-5 flex items-center justify-center mr-2 text-gray-400">
-                                <i class="ri-mail-line"></i>
-                            </div>
-                            <span class="text-gray-400">support@custompcbuilder.com</span>
-                        </li>
-                        <li class="flex items-center">
-                            <div class="w-5 h-5 flex items-center justify-center mr-2 text-gray-400">
-                                <i class="ri-time-line"></i>
-                            </div>
-                            <span class="text-gray-400">Mon-Fri: 9AM-6PM EST</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 Custom PC Builder. All rights reserved.</p>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Sitemap</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="fixed bottom-6 right-6 bg-primary text-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 cursor-pointer">
-        <div class="w-6 h-6 flex items-center justify-center">
-            <i class="ri-arrow-up-line"></i>
-        </div>
-    </button>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Back to Top Button
-            const backToTopButton = document.getElementById('backToTop');
-            
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    backToTopButton.classList.remove('opacity-0', 'invisible');
-                    backToTopButton.classList.add('opacity-100', 'visible');
-                } else {
-                    backToTopButton.classList.add('opacity-0', 'invisible');
-                    backToTopButton.classList.remove('opacity-100', 'visible');
-                }
-            });  
-            
-            backToTopButton.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // FAQ Toggle
-        function toggleFAQ(id) {
-            const answer = document.getElementById(`faq-answer-${id}`);
-            const arrow = document.getElementById(`faq-arrow-${id}`);
-            
-            if (answer.classList.contains('hidden')) {
-                answer.classList.remove('hidden');
-                arrow.classList.remove('ri-arrow-down-s-line');
-                arrow.classList.add('ri-arrow-up-s-line');
-            } else {
-                answer.classList.add('hidden');
-                arrow.classList.remove('ri-arrow-up-s-line');
-                arrow.classList.add('ri-arrow-down-s-line');
-            }
-        }
-    </script>
-</html>
+@endsection

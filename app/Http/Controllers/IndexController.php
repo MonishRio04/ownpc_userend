@@ -14,4 +14,6 @@ class IndexController extends Controller
         $data['categories'] = Category::where('status',1)->limit(5)->get();
         return view("welcome",$data);
     }
+
+    // public vfunctio
 }
