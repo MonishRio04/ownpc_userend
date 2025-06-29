@@ -11,10 +11,12 @@
                 <!-- Navigation -->
                 <nav class="hidden md:flex space-x-8">
                     <a href="#" class="text-primary font-medium">Home</a>
-                    <a href="#" class="text-gray-700 font-medium hover:text-primary transition-colors">PC Builder</a>
-                    <a href="#" class="text-gray-700 font-medium hover:text-primary transition-colors">Pre-Built PCs</a>
-                    <a href="#" class="text-gray-700 font-medium hover:text-primary transition-colors">Components</a>
-                    <a href="#" class="text-gray-700 font-medium hover:text-primary transition-colors">Deals</a>
+                    <a href="#" class="text-gray-700 font-medium hover:text-primary transition-colors">PC Builder
+                        <span class="bg-red-400 text-white animate-pulse text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">New</span>
+                    </a>
+                    <!-- <a href="#" class="text-gray-700 font-medium hover:text-primary transition-colors">Pre-Built PCs</a> -->
+                    <a href="#" class="text-gray-700 font-medium hover:text-primary transition-colors">Categories</a>
+                    <a href="#" class="text-gray-700 font-medium hover:text-primary transition-colors">About</a>
                     <a href="#" class="text-gray-700 font-medium hover:text-primary transition-colors">Support</a>
                 </nav>
                 
