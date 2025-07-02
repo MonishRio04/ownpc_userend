@@ -51,85 +51,23 @@ use Illuminate\Support\Facades\Auth;
 
 // Home page 
 require __DIR__ . '/users.php';
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard');
-    Route::post('/user/profile/store', [UserController::class, 'UserProfileStore'])->name('user.profile.store');
-    Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
-    Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+require __DIR__ . '/auth.php';
 
 //Routes for admin Role
 Route::middleware(['auth'])->group(function () {
+
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
     Route::get('/admin/logout', [AdminController::class, 'AdminDestroy'])->name('admin.logout');
     Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
     Route::post('/admin/profile/store', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
     Route::get('/admin/change/password', [AdminController::class, 'AdminChangePassword'])->name('admin.change.password');
     Route::post('/admin/update/password', [AdminController::class, 'AdminUpdatePassword'])->name('update.password');
-});
-Route::middleware(['auth', 'role:admin'])->group(function () {
+
     Route::get('admin/affiliate',[AdminController::class,'affiliate'])->name('admin.affiliate');
     Route::get('admin/affiliate/edit/{id}',[AdminController::class,'affiliateEdit'])->name('admin.affiliate.edit');
     Route::post('admin/affiliate/update/{id}',[AdminController::class,'affiliateUpdate'])->name('admin.affiliate.update');
     Route::get('admin/affiliate/delete/{id}',[AdminController::class,'affiliateDelete'])->name('admin.affiliate.delete');
-});
-//Routes for Vendor Role
-Route::middleware('auth', 'role:vendor')->group(function () {
-    Route::get('/vendor/dashboard', [VendorController::class, 'VendorDashboard'])->name('vendor.dashboard');
-    Route::get('/vendor/logout', [VendorController::class, 'VendorDestroy'])->name('vendor.logout');
-    Route::get('/vendor/profile', [VendorController::class, 'VendorProfile'])->name('vendor.profile');
-    Route::post('/vendor/profile/store', [VendorController::class, 'VendorProfileStore'])->name('vendor.profile.store');
-    Route::get('/vendor/change/password', [VendorController::class, 'VendorChangePassword'])->name('vendor.change.password');
-    Route::post('/vendor/update/password', [VendorController::class, 'VendorUpdatePassword'])->name('vendor.update.password');
-
-    // Vendor Add Product All Routes
-    Route::controller(VendorProductController::class)->group(function () {
-        Route::get('/vendor/all/product', 'VendorAllProduct')->name('vendor.all.product');
-        Route::get('/vendor/add/product', 'VendorAddProduct')->name('vendor.add.product');
-        Route::get('/vendor/subcategory/ajax/{category_id}', 'VendorGetSubCategory');
-        Route::post('/vendor/store/product', 'VendorStoreProduct')->name('vendor.store.product');
-        Route::get('/vendor/edit/product/{id}', 'VendorEditProduct')->name('vendor.edit.product');
-        Route::post('/vendor/update/product', 'VendorUpdateProduct')->name('vendor.update.product');
-        Route::post('/vendor/update/product/thambnail', 'VendorUpdateProductThambnail')->name('vendor.update.product.thambnail');
-        Route::post('/vendor/update/product/multiimage', 'VendorUpdateProductMultiimage')->name('vendor.update.product.multiimage');
-        Route::get('/vendor/product/multiimg/delete/{id}', 'VendorMultiimgDelete')->name('vendor.product.multiimg.delete');
-        Route::get('/vendor/product/inactive/{id}', 'VendorProductInactive')->name('vendor.product.inactive');
-        Route::get('/vendor/product/active/{id}', 'VendorProductActive')->name('vendor.product.active');
-        Route::get('/vendor/delete/product/{id}', 'VendorProductDelete')->name('vendor.delete.product');
-        });
-
-    // Vendor Order All Routes
-    Route::controller(VendorOrderController::class)->group(function () {
-        Route::get('/vendor/order', 'VendorOrder')->name('vendor.order');
-        Route::get('/vendor/return/order', 'VendorReturnOrder')->name('vendor.return.order');
-        Route::get('/vendor/complete/return/order', 'VendorCompleteReturnOrder')->name('vendor.complete.return.order');
-        Route::get('/vendor/order/details/{order_id}', 'VendorOrderDetails')->name('vendor.order.details');
-    });
-
-    //Admin Review All routes
-    Route::controller(ReviewController::class)->group(function () {
-        Route::get('/vendor/all/review', 'VendorAllReview')->name('vendor.all.review');
-    });
-
-});
-
-
-
-require __DIR__ . '/auth.php';
-
-
-Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->middleware(RedirectIfAuthenticated::class);
-Route::get('/vendor/login', [VendorController::class, 'VendorLogin'])->name('vendor.login')->middleware(RedirectIfAuthenticated::class);
-Route::get('/become/vendor', [VendorController::class, 'BecomeVendor'])->name('become.vendor');
-Route::post('/vendor/register', [VendorController::class, 'VendorRegister'])->name('vendor.register');
-
-Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->middleware(RedirectIfAuthenticated::class);
     // Brand All Routes
     Route::controller(BrandController::class)->group(function () {
         Route::get('/all/brand', 'AllBrand')->name('all.brand');
@@ -218,17 +156,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit/coupon/{id}', 'EditCoupon')->name('edit.coupon');
         Route::post('/update/coupon', 'UpdateCoupon')->name('update.coupon');
         Route::get('/delete/coupon/{id}', 'DeleteCoupon')->name('delete.coupon');
-    });
-
-    // Shipping Division All Routes
-    /*Route::controller(ShippingAreaController::class)->group(function () {
-        Route::get('/all/division', 'AllDivision')->name('all.division');
-        Route::get('/add/division', 'AddDivision')->name('add.division');
-        Route::post('/store/division', 'StoreDivision')->name('store.division');
-        Route::get('/edit/division/{id}', 'EditDivision')->name('edit.division');
-        Route::post('/update/division', 'UpdateDivision')->name('update.division');
-        Route::get('/delete/division/{id}', 'DeleteDivision')->name('delete.division');
-    });*/
+    });    
     Route::controller(ShippingAreaController::class)->group(function () {
         Route::get('/all/cities', 'AllCities')->name('all.cities');
         Route::get('/add/cities', 'AddCities')->name('add.cities');
@@ -371,121 +299,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/delete/admin/role/{id}', 'DeleteAdminRole')->name('delete.admin.role');
     });
 });
-
-
-
-//FrontEnd Product Details All Routes
-Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
-Route::get('/vendor/details/{id}', [IndexController::class, 'VendorDetails'])->name('vendor.details');
-Route::get('/vendor/all', [IndexController::class, 'VendorAll'])->name('vendor.all');
-Route::get('/product/category/{id}/{slug}', [IndexController::class, 'CatWiseProduct']);
-Route::get('/product/subcategory/{id}/{slug}', [IndexController::class, 'SubCatWiseProduct']);
-
-//Product View Model with Ajax
-Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
-
-//Add to cart store data
-Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
-
-//Product Mini Cart with Ajax
-Route::get('/product/mini/cart', [CartController::class, 'AddMiniCart']);
-Route::get('/minicart/product/remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
-
-//Add to cart store data for product details page
-Route::post('/dcart/data/store/{id}', [CartController::class, 'AddToCartDetails']);
-
-//Add to Wishlist
-Route::any('/add-to-wishlist/{product_id}', [WishlistController::class, 'AddToWishList']);
-
-//Add to Compare
-Route::post('/add-to-compare/{product_id}', [CompareController::class, 'AddToCompare']);
-
-//Frontend coupon
-Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
-Route::get('/coupon-calculation', [CartController::class, 'CouponCalculation']);
-Route::get('/coupon-remove', [CartController::class, 'CouponRemove']);
-// Checkout Page Route
-Route::get('/checkout', [CartController::class, 'CheckoutCreate'])->name('checkout');
-
-//Cart All Route
-Route::controller(CartController::class)->group(function () {
-    Route::get('/mycart', 'MyCart')->name('mycart');
-    Route::get('/get-cart-product', 'GetCartProduct');
-    Route::get('/GetCartProductWithWeigthNGST', 'GetCartProductWithWeigthNGST');
-    Route::get('/cart-remove/{rowId}', 'CartRemove');
-    Route::get('/cart-decrement/{rowId}', 'CartDecrement');
-    Route::get('/cart-increment/{rowId}', 'CartIncrement');
-});
-
-//Frontend Blog Post All routes
-Route::controller(BlogController::class)->group(function () {
-    Route::get('/blog', 'AllBlog')->name('home.blog');
-    Route::get('/post/details/{id}/{slug}', 'BlogDetails');
-    Route::get('/post/category/{id}/{slug}', 'BlogPostCategory');
-    Route::post('blog/comment/store','BlogCommentPost');
-});
-
-//Store Review Blog Post All routes
-Route::controller(ReviewController::class)->group(function () {
-    Route::post('/store/review', 'StoreReview')->name('store.review');
-});
-
-//Search All routes
-Route::controller(IndexController::class)->group(function () {
-    Route::post('/product/search', 'ProductSearch')->name('product.search');
-    Route::any('/search-product', 'SearchProduct');
-});
-
-//Shop page All routes
-Route::controller(ShopController::class)->group(function () {
-    Route::get('/shop', 'ShopPage')->name('shop.page');
-    Route::post('/shop/filter', 'ShopFilter')->name('shop.filter');
-});
-//User All Routes
-Route::middleware('auth', 'role:user')->group(function () {
-    Route::controller(WishlistController::class)->group(function () {
-        Route::get('/wishlist', 'AllWishlist')->name('wishlist');
-        Route::get('/get-wishlist-products', 'GetWishlistProduct');
-        Route::get('/wishlist-remove/{id}', 'WishlistRemove');
-    });
-
-    Route::controller(CompareController::class)->group(function () {
-        Route::get('/compare', 'AllCompare')->name('compare');
-        Route::get('/get-compare-products', 'GetCompareProduct');
-        Route::get('/compare-remove/{id}', 'CompareRemove');
-    });
-
-    Route::controller(CheckoutController::class)->group(function () {
-        Route::get('/district-get/ajax/{division_id}', 'DistrictGetAjax');
-        Route::get('/state-get/ajax/{district_id}', 'StateGetAjax');
-        Route::post('/checkout/store', 'CheckoutStore')->name('checkout.store');
-    });
-    //Stripe All route
-    Route::controller(StripeController::class)->group(function () {
-        Route::post('/stripe/order', 'StripeOrder')->name('stripe.order');
-        Route::post('/cash/order', 'CashOrder')->name('cash.order');
-    });
-
-    //User Account All route
-    Route::controller(AllUserController::class)->group(function () {
-        Route::get('/user/account/page', 'UserAccount')->name('user.account.page');
-        Route::get('/user/change/password', 'UserChangePassword')->name('user.change.password');
-        Route::get('/user/order/page', 'UserOrderPage')->name('user.order.page');
-        Route::get('/user/order-details/{order_id}', 'UserOrderDetails');
-        Route::get('/user/invoice-download/{order_id}', 'UserOrderInvoice');
-        Route::post('/return/order/{order_id}', 'ReturnOrder')->name('return.order');
-        Route::get('/return/order/page', 'ReturnOrderPage')->name('return.order.page');
-        //Order Tracking
-        Route::get('/user/track/order', 'UserTrackOrder')->name('user.track.order');
-        Route::post('/order/tracking', 'OrderTracking')->name('order.tracking');
-    });
-
-    Route::resource('address',AddressController::class);
-    Route::get('/get-districts/{state_id}', [AddressController::class, 'getDistricts']);
-    Route::get('/get-cities/{district_id}', [AddressController::class, 'getCities']);
-});
-
-
 // Affiliate
 
 Route::get('affiliate',[AffiliateController::class,'index'])->name('affiliate');
