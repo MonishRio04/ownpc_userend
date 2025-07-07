@@ -21,8 +21,26 @@ Route::get('/about', function () {
 Route::get('/single-product-1', function () {
     return view('my.singleProduct1');
 })->name('single.product.1');
+Route::get('/electronics', function () {
+    return view('my.electronics');
+})->name('Electronics');
+Route::get('/appliances', function () {
+    return view('my.appliances');
+})->name('Appliances');
+
+Route::get('/aboutus', function () {
+    return view('my.about');
+})->name('AboutUs');
 
 
+Route::get('/contactus', function () {
+    return view('my.contactus');
+})->name('ContactUs');
+
+
+Route::get('/checkout', function () {
+    return view('my.checkout');
+})->name('Checkout');
 
 
 

@@ -1,27 +1,31 @@
 @extends('layout.app')
 
 @section('content')
-
 <button id="goTopBtn" 
         class="fixed bottom-6 right-6 text-orange-400 text-3xl font-bold z-50 hidden">
 <i class="fa-solid fa-arrow-up-from-bracket"></i>
 </button>
     <div class="relative w-full h-[400px] bg-white overflow-hidden flex items-center justify-between px-16">
 
-        <div class="z-10 max-w-xl text-black space-y-4">
-            <p class="text-lg">Get <span class="text-2xl font-bold">25%</span> offer</p>
-            <h2 class="text-4xl font-bold">Upgrade Your Tech</h2>
-            <p class="text-lg">Best deals on custom PCs and gadgets</p>
-            <a href="#" class="bg-orange-500 hover:bg-[#0B1D51] text-white px-6 py-3 rounded shadow transition">
-                Shop Now
-            </a>
-        </div>
+ 
+    <div class="z-10 max-w-xl text-black space-y-4 transform -translate-y-16">
+        <p class="text-lg">
+            The Home <span class="text-4xl font-bold">Appliances</span> Store
+        </p>
 
-        <div class="w-1/2 h-full py-6">
-            <img src="{{ asset('images/pc2.jpg') }}" alt="Sale Banner" class="w-full h-auto object-contain" />
-        </div>
-
+        <p>
+            <a href="/" class="text-orange-400 font-bold">HOME</a>
+            <span class="mx-2 text-gray-500"><i class="fa-solid fa-greater-than text-xs"></i></span>
+            <span class=" font-bold">ELECTRONICS</span>
+        </p>
     </div>
+
+    <div class="w-1/2 h-full py-6">
+        <img src="{{ asset('images/pc2.jpg') }}" alt="Sale Banner" class="w-full h-auto object-contain" />
+    </div>
+
+</div>
+
 
     <h1 class="text-center text-4xl pt-18">Our <span class="font-bold">New Products</span></h1>
     <div class="container mx-auto px-4 py-10">
