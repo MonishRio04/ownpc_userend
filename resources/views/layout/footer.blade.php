@@ -1,17 +1,17 @@
-<div class="bg-[#021526] text-white pt-16 px-19 pb-8">
+<div class="bg-[#021526] text-white pt-16 px-16 pb-8  dark:bg-gray-800 dark:text-white">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div>
                     <h5 class="text-xl font-bold mb-4">Categories</h5>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-300 hover:text-orange-400 transition">Smartphones</a>
+                        <li><a href="{{route('Electronics')}}" class="text-gray-300 hover:text-orange-400 transition">Smartphones</a>
                         </li>
-                        <li><a href="#" class="text-gray-300 hover:text-orange-400 transition">Laptops &
+                        <li><a href="{{route('Electronics')}}"  class="text-gray-300 hover:text-orange-400 transition">Laptops &
                                 Tablets</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-orange-400 transition">Cameras</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-orange-400 transition">Audio Devices</a>
+                        <li><a href="{{route('Electronics')}}"  class="text-gray-300 hover:text-orange-400 transition">Cameras</a></li>
+                        <li><a href="{{route('Electronics')}}"  class="text-gray-300 hover:text-orange-400 transition">Audio Devices</a>
                         </li>
-                        <li><a href="#" class="text-gray-300 hover:text-orange-400 transition">Home
+                        <li><a href="{{route('Electronics')}}"  class="text-gray-300 hover:text-orange-400 transition">Home
                                 Appliances</a></li>
                     </ul>
                 </div>
@@ -76,10 +76,10 @@
         </div>
     </div>
 
-    <div class="w-full bg-white text-sm space-y-6 px-19 py-8">
+    <div class="w-full bg-white text-sm space-y-6 px-16 py-8 dark:bg-black dark:text-white">
 
         <div class="space-y-2 ">
-            <h4 class="font-bold text-2xl text-black">Mobile & Tablets</h4>
+            <h4 class="font-bold text-2xl text-black dark:text-white">Mobile & Tablets</h4>
             <div class="flex flex-wrap gap-2">
                 <a href="#" class="px-2 py-1 rounded text-gray-700 hover:text-orange-400">Android Phones</a>
                 <a href="#" class="px-2 py-1 rounded text-gray-700 hover:text-orange-400">Smartphones</a>
@@ -99,7 +99,7 @@
 
 
         <div class="space-y-2">
-            <h4 class="font-bold text-2xl text-black">Computers</h4>
+            <h4 class="font-bold text-2xl text-black dark:text-white">Computers</h4>
             <div class="flex flex-wrap gap-2">
                 <a href="#" class="px-2 py-1 rounded text-gray-700 hover:text-orange-400">Laptops</a>
                 <a href="#" class="px-2 py-1 rounded text-gray-700 hover:text-orange-400">Printers</a>
@@ -116,7 +116,7 @@
         </div>
 
         <div class="space-y-2">
-            <h4 class="font-bold text-2xl text-black">TV, Audio & Large Appliances</h4>
+            <h4 class="font-bold text-2xl text-black dark:text-white">TV, Audio & Large Appliances</h4>
             <div class="flex flex-wrap gap-2">
                 <a href="#" class="px-2 py-1 rounded text-gray-700 hover:text-orange-400">TVs & DTH</a>
                 <a href="#" class="px-2 py-1 rounded text-gray-700 hover:text-orange-400">Home Theatre
@@ -132,7 +132,7 @@
         </div>
 
         <div class="space-y-2">
-            <h4 class="font-bold text-2xl text-black">Mobile & Laptop Accessories</h4>
+            <h4 class="font-bold text-2xl text-black dark:text-white">Mobile & Laptop Accessories</h4>
             <div class="flex flex-wrap gap-2">
                 <a href="#" class="px-2 py-1 rounded text-gray-700 hover:text-orange-400">Headphones</a>
                 <a href="#" class="px-2 py-1 rounded text-gray-700 hover:text-orange-400">Power Banks</a>
@@ -150,7 +150,7 @@
         </div>
 
         <div class="space-y-2">
-            <h4 class="font-bold text-2xl text-black">Appliances</h4>
+            <h4 class="font-bold text-2xl text-black dark:text-white">Appliances</h4>
             <div class="flex flex-wrap gap-2">
                 <a href="#" class="px-2 py-1 rounded text-gray-700 hover:text-orange-400">Trimmers</a>
                 <a href="#" class="px-2 py-1 rounded text-gray-700 hover:text-orange-400">Hair Dryers</a>
@@ -164,7 +164,7 @@
             </div>
         </div>
         <div class="space-y-2">
-            <h4 class="font-bold text-2xl text-black">Popular on Electronics Mart</h4>
+            <h4 class="font-bold text-2xl text-black dark:text-white">Popular on Electronics Mart</h4>
             <div class="flex flex-wrap gap-2">
                 <a href="#" class="px-2 py-1 rounded text-gray-700 hover:text-orange-400">Offers & Coupons</a>
                 <a href="#" class="px-2 py-1 rounded text-gray-700 hover:text-orange-400">Couple Watches</a>
@@ -182,8 +182,14 @@
         </div>
 
         <div>
-            <h4 class="font-bold text-2xl text-black mb-2">Payment Method</h4>
-            <a href="#" class="text-sm text-gray-700 hover:underline">All Payment Options</a>
+            <h4 class="font-bold text-2xl text-black mb-2 dark:text-white">Payment Method</h4>
+              <div class="flex  space-x-4 text-3xl ">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                        <i class="fab fa-apple-pay"></i>
+                    </div>
         </div>
 
     </div>
@@ -191,5 +197,8 @@
     <div class=" p-4 text-center text-gray-400 bg-[#021526]">
         <p>© 2023 Electronics Mart. All rights reserved.</p>
     </div>
+   
+
+
 </body>
 </html>

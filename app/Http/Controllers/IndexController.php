@@ -12,7 +12,7 @@ class IndexController extends Controller
     public function index(){
         $data['products'] = Product::where('status',1)->get();
         $data['categories'] = Category::where('status',1)->limit(5)->get();
-        return view("welcome",$data);
+        return view("my.welcome",$data);
     }
 
     public function CategoryWiseProduct($id, $slug){

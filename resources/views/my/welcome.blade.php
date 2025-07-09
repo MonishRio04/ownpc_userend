@@ -1,23 +1,24 @@
 @extends('layout.app')
 
 @section('content')
+
 <button id="goTopBtn" 
         class="fixed bottom-6 right-6 text-orange-400 text-3xl font-bold z-50 hidden">
 <i class="fa-solid fa-arrow-up-from-bracket"></i>
 </button>
-    <div class="relative w-full h-[400px] bg-white dark:bg-black dark:text-white overflow-hidden flex items-center justify-between px-16">
 
- 
-    <div class="z-10 max-w-xl text-black space-y-4 transform -translate-y-16 dark:bg-black dark:text-white ">
+<div class="relative w-full h-[400px] bg-white dark:bg-gray-900 overflow-hidden flex items-center justify-between px-16">
+
+   <div class="z-10 max-w-xl text-black dark:text-white space-y-4">
         <p class="text-lg">
-            The Best <span class="text-4xl font-bold">Deals</span> on Electronics
+            Get <span class="text-2xl font-bold ">25%</span> offer
         </p>
-
-        <p>
-            <a href="/" class="text-orange-400 font-bold">HOME</a>
-            <span class="mx-2 text-gray-500 dark:bg-black dark:text-white"><i class="fa-solid fa-greater-than text-xs font-bold leading-none"></i></span>
-            <span class=" font-bold">ELECTRONICS</span>
-        </p>
+        <h2 class="text-4xl font-bold">Upgrade Your Tech</h2>
+        <p class="text-lg">Best deals on custom PCs and gadgets</p>
+        
+        <a href="#" class="inline-block bg-orange-500 hover:bg-[#0B1D51] text-white px-6 py-3 mt-6 rounded shadow transition duration-300">
+            Shop Now
+        </a>
     </div>
 
     <div class="w-1/2 h-full py-6">
@@ -26,13 +27,11 @@
 
 </div>
 
-
-    <h1 class="text-center text-4xl pt-18 dark:text-white">Our <span class="font-bold">New Products</span></h1>
+<h1 class="text-center text-4xl pt-18 dark:text-white">Our <span class="font-bold">New Products</span></h1>
 
 <div class="container mx-auto px-16 py-10">
     <div class="flex flex-col md:flex-row gap-8">
 
-   
         <div class="md:w-1/4 bg-blue-50 dark:bg-gray-800 p-4 rounded shadow text-left space-y-6">
 
             <div>
@@ -80,7 +79,6 @@
                 </div>
             </div>
 
-    
           <div>
     <h4 class="text-lg font-semibold mb-2 text-blue-900 dark:text-white">Price</h4>
     <ul class="space-y-1 text-sm text-gray-700 dark:text-gray-300">
@@ -170,6 +168,7 @@
                 </ul>
             </div>
 
+       
             <div>
                 <h4 class="text-lg font-semibold mb-3 text-blue-900 dark:text-white">Best Seller</h4>
                 <div class="overflow-hidden h-64 relative">
@@ -189,7 +188,6 @@
 
         </div>
 
-  
         <div class="md:w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   
     @for($i = 1; $i <= 6; $i++)
@@ -255,6 +253,7 @@
     </div>
 </div>
 
+
 <div class="px-16">
     <p class="font-bold text-black dark:text-white text-2xl dark:text-white p-2 pt-12">Electronics:</p>
     <p class="p-2 dark:text-gray-300">
@@ -264,7 +263,8 @@
             video and more.
     </p>
 
-    <div class="flex justify-between gap-6 text-center mt-6 pb-12">
+
+        <div class="flex justify-between gap-6 text-center mt-6 pb-12">
         <div class="flex-1 bg-white dark:bg-gray-900 p-4 rounded shadow text-black dark:text-white">
             <h1 class="font-bold text-2xl p-2">
                 <i class="fa-solid fa-cart-shopping text-3xl p-2 font-bold text-orange-400"></i>Free Shipping
@@ -286,7 +286,7 @@
             <p>of Products</p>
         </div>
     </div>
-</div>
+    </div>
 
 @push('scripts')
 <script>

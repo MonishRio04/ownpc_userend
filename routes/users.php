@@ -42,7 +42,18 @@ Route::get('/checkout', function () {
     return view('my.checkout');
 })->name('Checkout');
 
+Route::get('/terms', function () {
+    return view('my.terms');
+})->name('Terms');
 
-
+Route::get('/payment', function () {
+    return view('my.payment');
+})->name('Payment');
+ Route::get('/singleproduct1', function () {
+    return view('my.singleproduct1');
+})->name('SingleProduct1');
+Route::get('/singleproduct2', function () {
+    return view('my.singleproduct2');
+})->name('SingleProduct2');
 
 
