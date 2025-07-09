@@ -13,11 +13,11 @@
 
 
             <a href="javascript:void(0);" id="loginToggle" class="group hover:text-orange-500 flex items-center gap-1">
-  <i class="fa-solid fa-right-to-bracket text-gray-500 group-hover:text-orange-500"></i>
-  Log In
-</a>
+              <i class="fa-solid fa-right-to-bracket text-gray-500 group-hover:text-orange-500"></i>
+              Log In
+            </a>
 
-            <a href="#"  id="registerToggle" class="group hover:text-orange-500 flex items-center gap-1">
+            <a href="#" id="registerToggle" class="group hover:text-orange-500 flex items-center gap-1">
                 <i class="fa-solid fa-right-from-bracket text-gray-500 group-hover:text-orange-500"></i>
                 Register
             </a>
