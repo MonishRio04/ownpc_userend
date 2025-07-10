@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" class="">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
 
-  
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -35,9 +38,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
     <style>
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-scroll {
+            animation: scroll 20s linear infinite;
+            display: flex;
+        }
+
+
         @keyframes scroll-up {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); }
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        body {
+            font-family: "Outfit", sans-serif;
+
         }
 
         .animate-scroll {
@@ -65,24 +94,24 @@
 
 <body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-all duration-300">
 
-   
+
     @include('layout.header')
 
 
     <main>
         @yield('content')
     </main>
-@include('layout.location')
-@include('layout.cart')
-@include('layout.login')
-@include('layout.register')
+    @include('layout.location')
+    @include('layout.cart')
+    @include('layout.login')
+    @include('layout.register')
     @include('layout.footer')
 
     @stack('scripts')
 
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const savedTheme = localStorage.getItem('theme');
 
@@ -94,120 +123,193 @@
                 localStorage.setItem('theme', 'light');
             }
 
-            $('#toggleDark, #demoToggle').click(function () {
+            $('#toggleDark, #demoToggle').click(function() {
                 $('html').toggleClass('dark');
                 const mode = $('html').hasClass('dark') ? 'dark' : 'light';
                 localStorage.setItem('theme', mode);
             });
         });
-      
 
 
-  document.addEventListener('DOMContentLoaded', function () {
-    const locationToggle = document.getElementById('locationToggle');
-    const locationOverlay = document.getElementById('locationOverlay');
-    const closeLocationModal = document.getElementById('closeLocationModal');
-    const citySelect = document.getElementById('citySelect');
-    const selectedLocationText = document.getElementById('selectedLocationText');
 
-   
-    locationToggle?.addEventListener('click', function () {
-      locationOverlay?.classList.remove('hidden');
-    });
-
-  
-    closeLocationModal?.addEventListener('click', function () {
-      locationOverlay?.classList.add('hidden');
-    });
-
-   
-    citySelect?.addEventListener('change', function () {
-      const city = citySelect.value;
-      if (city) {
-        selectedLocationText.textContent = city;
-        locationOverlay?.classList.add('hidden');
-      }
-    });
-
- 
-    locationOverlay?.addEventListener('click', function (e) {
-      if (e.target === locationOverlay) {
-        locationOverlay?.classList.add('hidden');
-      }
-    });
-  });
- 
-  $(document).ready(function () {
-    $('#cartToggle').click(function () {
-      $('#cartOverlay').removeClass('hidden');
-    });
-
-    $('#closeCartModal').click(function () {
-      $('#cartOverlay').addClass('hidden');
-    });
-
-    $('#cartOverlay').click(function (e) {
-      if (e.target === this) {
-        $(this).addClass('hidden');
-      }
-    });
-  });
- 
-  $(document).ready(function () {
-    const $loginToggle = $('#loginToggle');
-    const $loginOverlay = $('#loginOverlay');
-    const $closeLoginModal = $('#closeLoginModal');
-
-   
-    $loginToggle.on('click', function () {
-      $loginOverlay.removeClass('hidden');
-    });
+        document.addEventListener('DOMContentLoaded', function() {
+            const locationToggle = document.getElementById('locationToggle');
+            const locationOverlay = document.getElementById('locationOverlay');
+            const closeLocationModal = document.getElementById('closeLocationModal');
+            const citySelect = document.getElementById('citySelect');
+            const selectedLocationText = document.getElementById('selectedLocationText');
 
 
-    $closeLoginModal.on('click', function () {
-      $loginOverlay.addClass('hidden');
-    });
+            locationToggle?.addEventListener('click', function() {
+                locationOverlay?.classList.remove('hidden');
+            });
 
-   
-    $loginOverlay.on('click', function (e) {
-      if (e.target === this) {
-        $loginOverlay.addClass('hidden');
-      }
-    });
-  });
 
-  $(document).ready(function () {
-    $('#registerToggle').on('click', function () {
-      $('#registerOverlay').removeClass('hidden');
-    });
+            closeLocationModal?.addEventListener('click', function() {
+                locationOverlay?.classList.add('hidden');
+            });
 
-    $('#closeRegisterModal').on('click', function () {
-      $('#registerOverlay').addClass('hidden');
-    });
 
-    $('#registerOverlay').on('click', function (e) {
-      if (e.target.id === 'registerOverlay') {
-        $('#registerOverlay').addClass('hidden');
-      }
-    });
-  });
-  $(document).ready(function () {
-  $('.open-register').on('click', function () {
-    $('#registerOverlay').removeClass('hidden');
-    $('#loginOverlay').addClass('hidden');
-  });
+            citySelect?.addEventListener('change', function() {
+                const city = citySelect.value;
+                if (city) {
+                    selectedLocationText.textContent = city;
+                    locationOverlay?.classList.add('hidden');
+                }
+            });
 
-  $('#closeRegisterModal').on('click', function () {
-    $('#registerOverlay').addClass('hidden');
-  });
 
-  $('#registerOverlay').on('click', function (e) {
-    if (e.target.id === 'registerOverlay') {
-      $('#registerOverlay').addClass('hidden');
-    }
-  });
-});
+            locationOverlay?.addEventListener('click', function(e) {
+                if (e.target === locationOverlay) {
+                    locationOverlay?.classList.add('hidden');
+                }
+            });
+        });
 
-</script>
+        $(document).ready(function() {
+            $('#cartToggle').click(function() {
+                $('#cartOverlay').removeClass('hidden');
+            });
+
+            $('#closeCartModal').click(function() {
+                $('#cartOverlay').addClass('hidden');
+            });
+
+            $('#cartOverlay').click(function(e) {
+                if (e.target === this) {
+                    $(this).addClass('hidden');
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            const $loginToggle = $('#loginToggle');
+            const $loginOverlay = $('#loginOverlay');
+            const $closeLoginModal = $('#closeLoginModal');
+
+
+            $loginToggle.on('click', function() {
+                $loginOverlay.removeClass('hidden');
+            });
+
+
+            $closeLoginModal.on('click', function() {
+                $loginOverlay.addClass('hidden');
+            });
+
+
+            $loginOverlay.on('click', function(e) {
+                if (e.target === this) {
+                    $loginOverlay.addClass('hidden');
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $('#registerToggle').on('click', function() {
+                $('#registerOverlay').removeClass('hidden');
+            });
+
+            $('#closeRegisterModal').on('click', function() {
+                $('#registerOverlay').addClass('hidden');
+            });
+
+            $('#registerOverlay').on('click', function(e) {
+                if (e.target.id === 'registerOverlay') {
+                    $('#registerOverlay').addClass('hidden');
+                }
+            });
+        });
+        $(document).ready(function() {
+            $('.open-register').on('click', function() {
+                $('#registerOverlay').removeClass('hidden');
+                $('#loginOverlay').addClass('hidden');
+            });
+
+            $('#closeRegisterModal').on('click', function() {
+                $('#registerOverlay').addClass('hidden');
+            });
+
+            $('#registerOverlay').on('click', function(e) {
+                if (e.target.id === 'registerOverlay') {
+                    $('#registerOverlay').addClass('hidden');
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            let current = 0;
+            const $slides = $('.banner-slide');
+            const $dots = $('.banner-dot');
+            let autoSlide;
+
+            function showSlide(index) {
+                $slides.each(function(i) {
+                    if (i === index) {
+                        $(this).css({
+                            'opacity': '1',
+                            'pointer-events': 'auto',
+                            'z-index': '10'
+                        });
+                    } else {
+                        $(this).css({
+                            'opacity': '0',
+                            'pointer-events': 'none',
+                            'z-index': '1'
+                        });
+                    }
+                });
+
+                $dots.removeClass('bg-orange-500').addClass('bg-white');
+                $dots.eq(index).removeClass('bg-white').addClass('bg-orange-500');
+
+                current = index;
+            }
+
+
+            function nextSlide() {
+                let next = (current + 1) % $slides.length;
+                showSlide(next);
+            }
+
+            function prevSlide() {
+                let prev = (current - 1 + $slides.length) % $slides.length;
+                showSlide(prev);
+            }
+
+
+            $('.banner-next').click(function() {
+                nextSlide();
+                resetAuto();
+            });
+
+            $('.banner-prev').click(function() {
+                prevSlide();
+                resetAuto();
+            });
+
+
+            $dots.click(function() {
+                let index = $(this).data('index');
+                showSlide(index);
+                resetAuto();
+            });
+
+            function startAutoSlide() {
+                autoSlide = setInterval(nextSlide, 5000);
+            }
+
+            function resetAuto() {
+                clearInterval(autoSlide);
+                startAutoSlide();
+            }
+
+
+            showSlide(0);
+            startAutoSlide();
+        });
+    </script>
+
 </body>
+
 </html>

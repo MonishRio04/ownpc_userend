@@ -52,6 +52,7 @@ use Illuminate\Support\Facades\Auth;
 // Home page 
 require __DIR__ . '/users.php';
 require __DIR__ . '/auth.php';
+    Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->middleware(RedirectIfAuthenticated::class);
 
 //Routes for admin Role
 Route::middleware(['auth'])->group(function () {
@@ -67,7 +68,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('admin/affiliate/edit/{id}',[AdminController::class,'affiliateEdit'])->name('admin.affiliate.edit');
     Route::post('admin/affiliate/update/{id}',[AdminController::class,'affiliateUpdate'])->name('admin.affiliate.update');
     Route::get('admin/affiliate/delete/{id}',[AdminController::class,'affiliateDelete'])->name('admin.affiliate.delete');
-    Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->middleware(RedirectIfAuthenticated::class);
     // Brand All Routes
     Route::controller(BrandController::class)->group(function () {
         Route::get('/all/brand', 'AllBrand')->name('all.brand');
