@@ -66,12 +66,11 @@
     </div>
 </div>
 
-
 <div class="w-full sticky top-0 z-50 bg-[#0B1D51] text-white shadow-md">
     <div class="container mx-auto px-10 py-5">
-        <nav class="flex flex-wrap items-center justify-between gap-4 text-sm font-medium">
+        <nav class="flex flex-wrap items-center justify-between gap-4 text-base font-light">
 
-            <div class="mr-6">
+            <div class="mr-6 font-medium">
                 <select name="categories"
                     class="bg-[#0B1D51] text-white px-10 py-3 border rounded focus:outline-none focus:ring-1">
                     <option disabled selected>All Categories</option>
@@ -83,78 +82,39 @@
                 </select>
             </div>
             <a href="/"
-                class="{{ Request::is('/') ? 'text-orange-500 font-bold' : 'text-white' }} hover:text-orange-400 font-bold">HOME</a>
+                class="{{ Request::is('/') ? 'text-orange-500' : 'text-white' }} hover:text-orange-400 font-medium">HOME</a>
 
 
-            <div class="relative inline-block group">
-                <a href="{{ route('Electronics') }}"
-                    class="{{ request()->routeIs('Electronics') ? 'text-orange-500 font-bold' : 'text-white' }} bg-[#0B1D51] px-3 py-1 rounded hover:text-orange-400 font-bold focus:outline-none  focus:ring-none">
-                    ELECTRONICS <i class="fa-solid fa-caret-down"></i>
-                </a>
-                <ul
-                    class="absolute left-0 mt-2 w-48 bg-white text-black dark:bg-gray-800 dark:text-white rounded-xl shadow-xl origin-top scale-y-0 opacity-0 invisible group-hover:scale-y-100 group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out z-50">
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Electronics') }}">All Computers</a>
-                    </li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Electronics') }}">Laptops</a></li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Electronics') }}">Monitors</a></li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Electronics') }}">Printers</a></li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Electronics') }}">Tablets</a></li>
-                </ul>
+     @foreach($menu_categories as $category)
+    <div class="relative group">
+        <a href="{{ route('category.product', $category->id) }}"
+           class="hover:text-orange-500 font-medium block px-4 py-2 flex items-center gap-1">
+            {{ $category->category_name }}
+            @if($category->subcategory->count())
+                <i class="fa-solid fa-caret-down"></i>
+            @endif
+        </a>
+
+        @if($category->subcategory->count())
+            <div
+                class="absolute top-full left-0 bg-white text-black rounded shadow-md hidden group-hover:block z-50 min-w-[200px]">
+                @foreach($category->subcategory as $sub)
+                    <a href="{{ route('subcategory.product', $sub->id) }}"
+                       class="block px-4 py-2 hover:text-orange-500 hover:bg-gray-100">
+                        {{ $sub->subcategory_name }}
+                    </a>
+                @endforeach
             </div>
+        @endif
+    </div>
+@endforeach
 
 
-            <div class="relative inline-block group">
-                <a href="{{ route('Appliances') }}"
-                    class="{{ request()->routeIs('Appliances') ? 'text-orange-500 font-bold' : 'text-white' }} bg-[#0B1D51] px-3 py-1 rounded hover:text-orange-400 font-bold focus:outline-none focus:ring-none">
-                    APPLIANCES <i class="fa-solid fa-caret-down"></i>
-                </a>
-                <ul
-                    class="absolute left-0 mt-2 w-48 bg-white text-black dark:bg-gray-800 dark:text-white rounded-xl shadow-xl origin-top scale-y-0 opacity-0 invisible group-hover:scale-y-100 group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out z-50">
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Appliances') }}">Fridge</a></li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Appliances') }}">Washing Machine<
-                                <li class="px-4 py-2 hover:text-orange-400"><a
-                                    href="{{ route('Appliances') }}">Oven</a></li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Appliances') }}">Heaters</a></li>
-                </ul>
-            </div>
 
 
-            <a href="{{ route('AboutUs') }}"
-                class="{{ request()->routeIs('AboutUs') ? 'text-orange-500 font-bold' : 'text-white' }} hover:text-orange-400 font-bold">
-                ABOUT US
-            </a>
-
-            <a href="{{ route('Electronics') }}" class="hover:text-orange-400 font-bold">
-                NEW ARRIVALS
-            </a>
-
-
-            <div class="relative inline-block group">
-                <a href="#"
-                    class="{{ request()->routeIs('Checkout') ? 'text-orange-500 font-bold' : 'text-white' }} bg-[#0B1D51] font-bold px-3 py-1 rounded hover:text-orange-400 focus:outline-none focus:ring-none">
-                    PAGES <i class="fa-solid fa-caret-down"></i>
-                </a>
-                <ul
-                    class="absolute left-0 mt-2 w-48 bg-white text-black dark:bg-gray-800 dark:text-white rounded-xl shadow-xl origin-top scale-y-0 opacity-0 invisible group-hover:scale-y-100 group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-out z-50">
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Electronics') }}">Product 1</a></li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Appliances') }}">Product 2</a></li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('SingleProduct1') }}">Single Product
-                            1</a></li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('SingleProduct2') }}">Single
-                            Product 2</a></li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Checkout') }}">Checkout</a></li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Payment') }}">Payment Page</a>
-                    </li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Help') }}">Help</a></li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('FAQS') }}">FAQS</a></li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Terms') }}">Terms of Use</a></li>
-                    <li class="px-4 py-2 hover:text-orange-400"><a href="{{ route('Privacy') }}">Privacy policy</a>
-                    </li>
-                </ul>
-            </div>
 
             <a href="{{ route('ContactUs') }}"
-                class="{{ request()->routeIs('ContactUs') ? 'text-orange-500 font-bold' : 'text-white' }} hover:text-orange-400 font-bold">
+                class="{{ request()->routeIs('ContactUs') ? 'text-orange-500 font-bold' : 'text-white' }} hover:text-orange-400 font-medium">
                 CONTACT US
             </a>
 

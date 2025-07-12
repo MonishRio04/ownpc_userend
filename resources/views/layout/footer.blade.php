@@ -2,7 +2,7 @@
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div>
-                <h5 class="text-xl font-bold mb-4">Categories</h5>
+                 <h5 class="text-xl font-bold mb-4">Categories</h5>
                 <ul class="space-y-2">
                     <li><a href="{{ route('Electronics') }}"
                             class="text-gray-300 hover:text-orange-400 transition">Smartphones</a>

@@ -7,10 +7,11 @@ use App\Http\Controllers\my\CheckoutController as MyCheckoutController;
 use App\Http\Controllers\my\ContactController;
 use App\Http\Controllers\my\PaymentController;
 use App\Http\Controllers\my\SupportController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\User\CheckoutController;
 
 Route::get('/', [IndexController::class, 'Index']);
-Route::get('/category/{id}/{slug}', [IndexController::class, 'CategoryWiseProduct'])->name('categorywise.product');
+//Route::get('/category/{id}/{slug}', [IndexController::class, 'CategoryWiseProduct'])->name('categorywise.product');
 
 Route::get('/terms', function () {
     return view('my.terms');
@@ -64,3 +65,6 @@ Route::get('/faqs',function(){
     return view('my.faqs');
 })->name('FAQS');
 
+Route::get('/category/{id}/', [IndexController::class, 'CategoryProduct'])->name('category.product');
+Route::get('/subcategory/{id}', [IndexController::class, 'SubCategoryProduct'])->name('subcategory.product');
+Route::get('/product/{id}', [IndexController::class, 'ShowSingleProduct'])->name('SingleProduct1');

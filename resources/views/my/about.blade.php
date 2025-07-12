@@ -5,7 +5,7 @@
     </button>
 
     <div class="relative w-full h-[400px] bg-cover bg-center flex items-center px-16"
-        style="background-image: url('{{ asset('images/pc.png') }}');">
+         style="background-image: url('{{ asset('images/pc.png') }}');">
 
         <div class="z-10 max-w-xl text-white dark:text-white space-y-4">
             <p class="text-lg">

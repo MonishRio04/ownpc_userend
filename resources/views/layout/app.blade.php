@@ -15,6 +15,19 @@
             darkMode: 'class',
             theme: {
                 extend: {
+                    keyframes: {
+                        'vertical-scroll': {
+                            '0%': {
+                                transform: 'translateY(0%)'
+                            },
+                            '100%': {
+                                transform: 'translateY(-100%)'
+                            },
+                        },
+                    },
+                    animation: {
+                        'vertical-scroll': 'vertical-scroll 8s linear infinite',
+                    },
                     colors: {
                         primary: {
                             400: '#ff9800',
@@ -65,7 +78,7 @@
         }
 
         body {
-            font-family: "Outfit", sans-serif;
+            font-family: "Lexend", sans-serif;
 
         }
 
@@ -237,78 +250,130 @@
             });
         });
 
-        $(document).ready(function() {
-            let current = 0;
-            const $slides = $('.banner-slide');
-            const $dots = $('.banner-dot');
-            let autoSlide;
+        document.addEventListener('DOMContentLoaded', function() {
+            let slides = document.querySelectorAll('.banner-slide');
+            let dots = document.querySelectorAll('.banner-dot');
+            let currentSlide = 0;
+            let interval;
 
             function showSlide(index) {
-                $slides.each(function(i) {
-                    if (i === index) {
-                        $(this).css({
-                            'opacity': '1',
-                            'pointer-events': 'auto',
-                            'z-index': '10'
-                        });
-                    } else {
-                        $(this).css({
-                            'opacity': '0',
-                            'pointer-events': 'none',
-                            'z-index': '1'
-                        });
-                    }
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('opacity-100', i === index);
+                    slide.classList.toggle('opacity-0', i !== index);
                 });
 
-                $dots.removeClass('bg-orange-500').addClass('bg-white');
-                $dots.eq(index).removeClass('bg-white').addClass('bg-orange-500');
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('bg-orange-500', i === index);
+                    dot.classList.toggle('bg-white', i !== index);
+                });
 
-                current = index;
+                currentSlide = index;
             }
-
 
             function nextSlide() {
-                let next = (current + 1) % $slides.length;
-                showSlide(next);
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
             }
-
-            function prevSlide() {
-                let prev = (current - 1 + $slides.length) % $slides.length;
-                showSlide(prev);
-            }
-
-
-            $('.banner-next').click(function() {
-                nextSlide();
-                resetAuto();
-            });
-
-            $('.banner-prev').click(function() {
-                prevSlide();
-                resetAuto();
-            });
-
-
-            $dots.click(function() {
-                let index = $(this).data('index');
-                showSlide(index);
-                resetAuto();
-            });
 
             function startAutoSlide() {
-                autoSlide = setInterval(nextSlide, 5000);
+                interval = setInterval(nextSlide, 5000);
             }
 
-            function resetAuto() {
-                clearInterval(autoSlide);
-                startAutoSlide();
+            function stopAutoSlide() {
+                clearInterval(interval);
             }
 
+            document.querySelector('.banner-prev')?.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            });
 
-            showSlide(0);
+            document.querySelector('.banner-next')?.addEventListener('click', () => {
+                nextSlide();
+            });
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    showSlide(parseInt(dot.dataset.index));
+                });
+            });
+
             startAutoSlide();
+
+            const bannerContainer = document.querySelector('.banner-container');
+            bannerContainer.addEventListener('mouseenter', stopAutoSlide);
+            bannerContainer.addEventListener('mouseleave', startAutoSlide);
         });
+
+        $(document).ready(function() {
+
+            $('.category-link').on('click', function(e) {
+                let hasSub = $(this).data('has-sub');
+                let url = $(this).data('url');
+
+                if (hasSub === 1 || hasSub === '1') {
+                    e.preventDefault();
+
+                    let $dropdown = $(this).siblings('.subcategory-dropdown');
+                    $('.subcategory-dropdown').not($dropdown).slideUp();
+                    $dropdown.slideToggle();
+                } else {
+
+                    window.location.href = url;
+                }
+            });
+
+            $(document).on('click', function(e) {
+                if (!$(e.target).closest('.category-item').length) {
+                    $('.subcategory-dropdown').slideUp();
+                }
+            });
+        });
+       
+    $(document).ready(function () {
+        let $slides = $('#productSlider .slide');
+        let $dots = $('#productSlider .dot');
+        let currentIndex = 0;
+        let interval;
+
+        function showSlide(index) {
+            $slides.each(function (i) {
+                $(this).css({
+                    'opacity': i === index ? '1' : '0',
+                    'z-index': i === index ? '10' : '1',
+                    'pointer-events': i === index ? 'auto' : 'none'
+                });
+            });
+
+            $dots.each(function (i) {
+                $(this).removeClass('bg-orange-400').addClass('bg-gray-400');
+                if (i === index) {
+                    $(this).addClass('bg-orange-400');
+                }
+            });
+
+            currentIndex = index;
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % $slides.length;
+            showSlide(currentIndex);
+        }
+
+        $dots.each(function (i) {
+            $(this).on('click', function () {
+                showSlide(i);
+            });
+        });
+
+        showSlide(currentIndex);
+        interval = setInterval(nextSlide, 3000); // Auto-slide every 3 seconds
+    });
+
+
     </script>
+
+
 
 </body>
 
