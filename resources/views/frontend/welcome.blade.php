@@ -163,13 +163,13 @@
                     <div class="bg-white dark:bg-gray-900 rounded shadow p-4 text-center hover:shadow-lg transition group relative">
                         <div class="relative">
                             <img src="{{ asset($product->product_thambnail ?: 'images/pc.png') }}" alt="Product Image" class="mx-auto mb-3 w-full h-[180px] object-contain">
-                            <a href="{{ route('SingleProduct1', $product->id) }}" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="bg-[#0B1D51] hover:bg-orange-400 text-white px-4 py-2 rounded shadow">Quick View</button>
-                            </a>
-                        </div>
+                                                 </div>
                         <h4 class="font-semibold text-gray-800 dark:text-white mb-1 truncate">{{ $product->product_name }}</h4>
                         <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">₹{{ number_format($product->selling_price) }}</p>
-                        <button class="mt-2 bg-[#0B1D51] hover:bg-orange-600 text-white px-4 py-2 rounded text-sm transition w-1/2">Add to Cart</button>
+                        <a href="{{route('showproduct',$product->id)}}">
+                        
+                        <button class="mt-2 bg-[#0B1D51] hover:bg-orange-600 text-white px-4 py-2 rounded text-sm transition w-1/2">Quick View</button>
+                        </a>
                     </div>
                 @endforeach
 
@@ -182,14 +182,14 @@
                     <div class="bg-white dark:bg-gray-900 rounded shadow p-4 text-center hover:shadow-lg transition group relative">
                         <div class="relative">
                             <img src="{{ asset($product->product_thambnail ?: 'images/pc.png') }}" alt="Product Image" class="mx-auto mb-3 w-full h-[180px] object-contain">
-                            <a href="{{ route('SingleProduct1', $product->id) }}" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                <button class="bg-[#0B1D51] hover:bg-orange-400 text-white px-4 py-2 rounded shadow">Quick View</button>
-                            </a>
+                           
                         </div>
                         <h4 class="font-semibold text-gray-800 dark:text-white mb-1 truncate">{{ $product->product_name }}</h4>
+                        
                         <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">₹{{ number_format($product->selling_price) }}</p>
-                        <button class="mt-2 bg-[#0B1D51] hover:bg-orange-600 text-white px-4 py-2 rounded text-sm transition w-full">Add to Cart</button>
-                    </div>
+                        <a href="{{route('showproduct',$product->id)}}">
+                        <button class="mt-2 bg-[#0B1D51] hover:bg-orange-600 text-white px-4 py-2 rounded text-sm transition w-1/2">Quick View</button>
+                    </div></a>
                 @endforeach
             </div>
 
@@ -206,29 +206,7 @@
         </div>
     </div>
 
-    <div class="container mx-auto px-4">
-        <p class="font-bold text-black dark:text-white text-2xl py-4">Electronics:</p>
-        <p class="pb-4 dark:text-gray-300">
-            If you're considering a new laptop, looking for a powerful new car stereo or shopping for a new HDTV, we make it easy to find exactly what you need at a price you can afford...
-        </p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 py-12">
-            <div class="bg-white dark:bg-gray-900 p-6 rounded shadow text-center">
-                <div class="text-orange-400 text-4xl mb-3"><i class="fa-solid fa-cart-shopping"></i></div>
-                <h3 class="font-bold text-xl text-black dark:text-white mb-2">Free Shipping</h3>
-                <p class="text-gray-600 dark:text-gray-300">on orders over $100</p>
-            </div>
-            <div class="bg-white dark:bg-gray-900 p-6 rounded shadow text-center">
-                <div class="text-orange-400 text-4xl mb-3"><i class="fa-solid fa-truck-fast"></i></div>
-                <h3 class="font-bold text-xl text-black dark:text-white mb-2">Fast Delivery</h3>
-                <p class="text-gray-600 dark:text-gray-300">World Wide</p>
-            </div>
-            <div class="bg-white dark:bg-gray-900 p-6 rounded shadow text-center">
-                <div class="text-orange-400 text-4xl mb-3"><i class="fa-regular fa-thumbs-up"></i></div>
-                <h3 class="font-bold text-xl text-black dark:text-white mb-2">Big Choice</h3>
-                <p class="text-gray-600 dark:text-gray-300">of Products</p>
-            </div>
-        </div>
-    </div>
+   
 
     @push('scripts')
     <script>

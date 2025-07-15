@@ -61,6 +61,7 @@
 
         <button id="cartToggle" type="button" class="flex items-center gap-1 text-lg px-3 py-1 rounded transition">
             <i class="fa-solid fa-cart-shopping"></i> Cart
+           
         </button>
 
     </div>
@@ -70,7 +71,7 @@
     <div class="container mx-auto px-10 py-5">
         <nav class="flex flex-wrap items-center justify-between gap-4 text-base font-light">
 
-            <div class="mr-6 font-medium">
+          {{--  <div class="mr-6 font-medium">
                 <select name="categories"
                     class="bg-[#0B1D51] text-white px-10 py-3 border rounded focus:outline-none focus:ring-1">
                     <option disabled selected>All Categories</option>
@@ -80,22 +81,21 @@
                     <option>Mobile</option>
                     <option>Appliances</option>
                 </select>
-            </div>
+            </div>--}}
             <a href="/"
                 class="{{ Request::is('/') ? 'text-orange-500' : 'text-white' }} hover:text-orange-400 font-medium">HOME</a>
-
-
-     @foreach($menu_categories as $category)
+@foreach($menu_categories as $category)
     <div class="relative group">
         <a href="{{ route('category.product', $category->id) }}"
            class="hover:text-orange-500 font-medium block px-4 py-2 flex items-center gap-1">
             {{ $category->category_name }}
-            @if($category->subcategory->count())
+           
                 <i class="fa-solid fa-caret-down"></i>
-            @endif
+      
+
         </a>
 
-        @if($category->subcategory->count())
+        @if($category->subcategory->isNotEmpty())
             <div
                 class="absolute top-full left-0 bg-white text-black rounded shadow-md hidden group-hover:block z-50 min-w-[200px]">
                 @foreach($category->subcategory as $sub)
@@ -108,11 +108,6 @@
         @endif
     </div>
 @endforeach
-
-
-
-
-
             <a href="{{ route('ContactUs') }}"
                 class="{{ request()->routeIs('ContactUs') ? 'text-orange-500 font-bold' : 'text-white' }} hover:text-orange-400 font-medium">
                 CONTACT US

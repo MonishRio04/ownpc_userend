@@ -21,12 +21,14 @@ class AppServiceProvider extends ServiceProvider
     
          public function boot(): void
     {
-        View::composer('*', function ($view) {
-            $menu_categories = Category::with(['subcategory' => function($query) {
-                $query->limit(5);
-            }])->get();
+       View::composer('*', function ($view) {
+        $menu_categories = Category::whereHas('subcategory.products')
+            ->with(['subcategory' => function ($query) {
+                $query->whereHas('products');
+            }])
+            ->get();
 
-            $view->with('menu_categories', $menu_categories);
+        $view->with('menu_categories', $menu_categories);
         });
     }
     }

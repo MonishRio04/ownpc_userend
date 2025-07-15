@@ -78,38 +78,7 @@
         </div>
     </section>
 
-    <div class="px-6 md:px-16">
-        <p class="font-bold text-black dark:text-white text-2xl p-2 pt-12">Electronics:</p>
-        <p class="p-2 text-gray-700 dark:text-gray-300">
-            If you're considering a new laptop, looking for a powerful new car stereo or shopping for a new HDTV, we
-            make it easy to find exactly what you need at a price you can afford. We offer Every Day Low Prices on TVs,
-            laptops, cell phones, tablets and iPads, video games, desktop computers, cameras and camcorders, audio,
-            video and more.
-        </p>
-
-        <div class="flex justify-between gap-6 text-center mt-6 pb-12">
-            <div class="flex-1 bg-white dark:bg-gray-900 p-4 rounded shadow text-black dark:text-white">
-                <h1 class="font-bold text-2xl p-2">
-                    <i class="fa-solid fa-cart-shopping text-3xl p-2 font-bold text-orange-400"></i>Free Shipping
-                </h1>
-                <p>on orders over $100</p>
-            </div>
-
-            <div class="flex-1 bg-white dark:bg-gray-900 p-4 rounded shadow text-black dark:text-white">
-                <h1 class="font-bold text-2xl p-2">
-                    <i class="fa-solid fa-truck-fast text-3xl p-2 font-bold text-orange-400"></i>Fast Delivery
-                </h1>
-                <p>World Wide</p>
-            </div>
-
-            <div class="flex-1 bg-white dark:bg-gray-900 p-4 rounded shadow text-black dark:text-white">
-                <h1 class="font-bold text-2xl p-2">
-                    <i class="fa-regular fa-thumbs-up text-3xl p-2 font-bold text-orange-400"></i>Big Choice
-                </h1>
-                <p>of Products</p>
-            </div>
-        </div>
-    </div>
+   
 
     @push('scripts')
         <script>
