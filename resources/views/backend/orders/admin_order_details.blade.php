@@ -50,7 +50,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th>Division</th>
-                                                    <th>{{$order->division->division_name}}</th>
+                                                    <th>{{$order->division?->division_name}}</th>
                                                 </tr>
                                                 <tr>
                                                     <th>District:</th>
@@ -175,7 +175,7 @@
                             </td>
                             @else
                             <td class="col-md-2">
-                                <label>{{$item->product->vendor->name}}</label>
+                                <label>{{$item->product->vendor?->name}}</label>
                             </td>
                             @endif
 

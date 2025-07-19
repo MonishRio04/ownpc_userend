@@ -2,11 +2,9 @@
 
 @section('content')
     <div id="mainContent">
-       
         <button id="goTopBtn" class="fixed bottom-6 right-6 text-orange-400 text-3xl font-bold z-50 hidden">
             <i class="fa-solid fa-arrow-up-from-bracket"></i>
         </button>
-
         <div class="relative w-full h-[400px] bg-cover bg-center flex items-center px-16"
             style="background-image: url('{{ asset('images/3slider.jpg') }}');">
             <div class="z-10 max-w-xl text-black dark:text-white space-y-4">
@@ -22,10 +20,9 @@
                 </p>
             </div>
         </div>
-
         <div class="container mx-auto px-4 py-8">
             <div class="flex flex-col lg:flex-row gap-8">
-       
+
                 <div class="lg:w-1/2 bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6">
                     <div
                         class="overflow-hidden rounded-xl h-96 mb-4 flex justify-center items-center bg-white dark:bg-gray-900">
@@ -103,7 +100,7 @@
                 });
 
                 $('html').css('overflow-y', 'scroll');
-                $('body').css('overflow-y', 'scroll');
+                $('body').css('overflow', 'visible');
 
                 $.ajaxSetup({
                     headers: {
@@ -130,57 +127,36 @@
                         },
                         success: function(response) {
                             if (response.status === 'success') {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Success!',
-                                    text: 'Product added to cart.',
-                                    timer: 1200,
-                                    showConfirmButton: false,
-                                    scrollbarPadding: false,
-                                    backdrop: true,
-                                    allowOutsideClick: false,
-                                    didOpen: () => {
-                                        document.documentElement.style.overflowY =
-                                            'scroll';
-                                        document.body.style.overflowY = 'scroll';
-                                    },
-                                    didClose: () => {
-                                        $.ajax({
-                                            url: "{{ route('checkout') }}",
-                                            type: 'GET',
-                                            success: function(data) {
-                                                mainContent.fadeOut(100,
-                                                    function() {
-                                                        $(this).html(
-                                                                data)
-                                                            .fadeIn(
-                                                            200);
-                                                        window.scrollTo(
-                                                            0, 0
-                                                            ); // ✅ Jump instantly to top
-                                                        mainContent.css(
-                                                            'min-height',
-                                                            '');
-                                                    });
-                                            },
-                                            error: function() {
-                                                alert(
-                                                    'Failed to load checkout.');
-                                                mainContent.css(
-                                                    'min-height', '');
-                                            }
+                                toastr.success('Product added to cart.');
+
+                                $.ajax({
+                                    url: "{{ route('checkout') }}",
+                                    type: 'GET',
+                                    success: function(data) {
+                                        mainContent.fadeOut(100, function() {
+                                            $(this).html(data).fadeIn(200);
+                                            window.scrollTo(0, 0);
+                                            mainContent.css('min-height', '');
                                         });
+                                    },
+                                    error: function() {
+                                        toastr.error('Failed to load checkout.');
+                                        mainContent.css('min-height', '');
                                     }
                                 });
+                            } else {
+                                toastr.error('Something went wrong.');
+                                mainContent.css('min-height', '');
                             }
                         },
                         error: function(xhr) {
                             console.error(xhr.responseText);
-                            alert('Error adding item to cart');
+                            toastr.error('Error adding item to cart.');
                             mainContent.css('min-height', '');
                         }
                     });
                 });
+
 
                 $(document).on('click', '.remove-cart-item', function(e) {
                     e.preventDefault();
@@ -196,25 +172,14 @@
                             if (response.status === 'success') {
                                 $('button[data-rowid="' + rowId + '"]').closest('tr').remove();
                                 $('.cart-total').text('Total: ₹' + response.total);
-
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Removed!',
-                                    text: response.message,
-                                    timer: 1200,
-                                    showConfirmButton: false,
-                                    scrollbarPadding: false,
-                                    didOpen: () => {
-                                        document.documentElement.style.overflowY =
-                                            'scroll';
-                                        document.body.style.overflowY = 'scroll';
-                                    }
-                                });
+                                toastr.success(response.message);
+                            } else {
+                                toastr.error('Failed to remove item.');
                             }
                         },
                         error: function(xhr) {
                             console.error(xhr);
-                            alert('Failed to remove item');
+                            toastr.error('Error removing item.');
                         }
                     });
                 });

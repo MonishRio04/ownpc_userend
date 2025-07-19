@@ -68,4 +68,14 @@ class User extends Authenticatable
             return $hasPermission;
         }
     }
+    public function wishlist()
+{
+    return $this->hasMany(\App\Models\Wishlist::class, 'user_id', 'id');
+}
+
+public function orders()
+{
+    return $this->hasMany(\App\Models\Order::class, 'user_id', 'id');
+}
+
 }

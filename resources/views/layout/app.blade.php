@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" class="">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -48,63 +42,40 @@
             }
         }
     </script>
-
-    <!-- jQuery + SweetAlert2 + FontAwesome -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-
-    <!-- Custom CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <style>
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .animate-scroll {
-            animation: scroll 20s linear infinite;
-            display: flex;
-        }
-
-        @keyframes scroll-up {
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(-50%);
-            }
-        }
-
-        .animate-scroll {
-            animation: scroll-up 5s linear infinite;
-        }
-
-        body,
         html {
-            font-family: "Lexend", sans-serif;
-            overflow-y: scroll !important;
+            overflow-y: scroll;
         }
 
-        *,
-        *::before,
-        *::after {
+        body {
+            font-family: "Outfit", sans-serif;
+            overflow: visible;
+        }
+
+        * {
             box-sizing: border-box;
-        }
-
-        body.swal2-shown {
-            padding-right: 0 !important;
-            overflow-y: scroll !important;
         }
 
         .dropdown-menu {
             transition: all 0.3s ease;
             transform-origin: top;
+        }
+
+        #toast-container>.toast-success {
+            background-color: #06923E !important;
+
+            color: #fff !important;
+            opacity: 1 !important;
+        }
+
+        #toast-container>.toast-error {
+            background-color: #DC2525 !important;
+
+            color: #fff !important;
+            opacity: 1 !important;
         }
 
         .dark .dropdown-menu {
@@ -133,191 +104,191 @@
 
     @include('layout.location')
     @include('layout.cart')
-    @include('layout.login')
-    @include('layout.register')
+    @include('userauth.login')
+    @include('userauth.register')
     @include('layout.footer')
 
     @stack('scripts')
 
-  <script>
-    $(document).ready(function () {
-       
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const savedTheme = localStorage.getItem('theme');
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-            $('html').addClass('dark');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            $('html').removeClass('dark');
-            localStorage.setItem('theme', 'light');
-        }
-
-        $('#toggleDark, #demoToggle').on('click', function () {
-            $('html').toggleClass('dark');
-            const mode = $('html').hasClass('dark') ? 'dark' : 'light';
-            localStorage.setItem('theme', mode);
-        });
-
-        //  Location Modal
-        $('#locationToggle').on('click', function () {
-            $('#locationOverlay').removeClass('hidden');
-        });
-        $('#closeLocationModal').on('click', function () {
-            $('#locationOverlay').addClass('hidden');
-        });
-        $('#citySelect').on('change', function () {
-            $('#selectedLocationText').text($(this).val());
-            $('#locationOverlay').addClass('hidden');
-        });
-        $('#locationOverlay').on('click', function (e) {
-            if (e.target === this) {
-                $(this).addClass('hidden');
-            }
-        });
-
-        // Cart Modal
-        $('#cartToggle').on('click', function () {
-            $('#cartOverlay').removeClass('hidden');
-        });
-        $('#closeCartModal').on('click', function () {
-            $('#cartOverlay').addClass('hidden');
-        });
-        $('#cartOverlay').on('click', function (e) {
-            if (e.target === this) {
-                $(this).addClass('hidden');
-            }
-        });
-
-        // Login Modal
-        $('#loginToggle').on('click', function () {
-            $('#loginOverlay').removeClass('hidden');
-        });
-        $('#closeLoginModal').on('click', function () {
-            $('#loginOverlay').addClass('hidden');
-        });
-        $('#loginOverlay').on('click', function (e) {
-            if (e.target === this) {
-                $(this).addClass('hidden');
-            }
-        });
-
-        //  Register Modal
-        $('#registerToggle').on('click', function () {
-            $('#registerOverlay').removeClass('hidden');
-        });
-        $('#closeRegisterModal').on('click', function () {
-            $('#registerOverlay').addClass('hidden');
-        });
-        $('#registerOverlay').on('click', function (e) {
-            if (e.target.id === 'registerOverlay') {
-                $(this).addClass('hidden');
-            }
-        });
-
-        //  Switch Login ↔ Register
-        $('.open-register').on('click', function () {
-            $('#registerOverlay').removeClass('hidden');
-            $('#loginOverlay').addClass('hidden');
-        });
-
-        // Product Slider
-        let $slides = $('#productSlider .slide');
-        let $dots = $('#productSlider .dot');
-        let currentIndex = 0;
-
-        function showSlide(index) {
-            $slides.each(function (i) {
-                $(this).css({
-                    opacity: i === index ? '1' : '0',
-                    'z-index': i === index ? '10' : '1',
-                    'pointer-events': i === index ? 'auto' : 'none'
-                });
-            });
-
-            $dots.removeClass('bg-orange-400').addClass('bg-gray-400');
-            $dots.eq(index).addClass('bg-orange-400');
-
-            currentIndex = index;
-        }
-
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % $slides.length;
-            showSlide(currentIndex);
-        }
-
-        $dots.each(function (i) {
-            $(this).on('click', function () {
-                showSlide(i);
-            });
-        });
-
-        showSlide(currentIndex);
-        setInterval(nextSlide, 3000);
-
-        //  Banner Slider
-        let $bannerSlides = $('.banner-slide');
-        let $bannerDots = $('.banner-dot');
-        let currentBanner = 0;
-        let bannerInterval;
-
-        function showBannerSlide(index) {
-            $bannerSlides.each(function (i) {
-                $(this).toggleClass('opacity-100', i === index);
-                $(this).toggleClass('opacity-0', i !== index);
-            });
-            $bannerDots.each(function (i) {
-                $(this).toggleClass('bg-orange-500', i === index);
-                $(this).toggleClass('bg-white', i !== index);
-            });
-            currentBanner = index;
-        }
-
-        function nextBannerSlide() {
-            currentBanner = (currentBanner + 1) % $bannerSlides.length;
-            showBannerSlide(currentBanner);
-        }
-
-        function startBannerSlide() {
-            bannerInterval = setInterval(nextBannerSlide, 5000);
-        }
-
-        function stopBannerSlide() {
-            clearInterval(bannerInterval);
-        }
-
-        $('.banner-prev').on('click', function () {
-            currentBanner = (currentBanner - 1 + $bannerSlides.length) % $bannerSlides.length;
-            showBannerSlide(currentBanner);
-        });
-
-        $('.banner-next').on('click', function () {
-            nextBannerSlide();
-        });
-
-        $bannerDots.each(function (i) {
-            $(this).on('click', function () {
-                showBannerSlide(i);
-            });
-        });
-
-        $('.banner-container').on('mouseenter', stopBannerSlide).on('mouseleave', startBannerSlide);
-
-        startBannerSlide();
-    });
-</script>
-
-@if (session('success'))
     <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: '{{ session('success') }}',
+        toastr.options = {
+            closeButton: true,
+            progressBar: true,
+            positionClass: "toast-top-right",
+            timeOut: 3000,
+            extendedTimeOut: 1000,
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut"
+        };
+    </script>
+
+    @if (session('success'))
+        <script>
+            toastr.success("{!! session('success') !!}");
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            toastr.error("{!! session('error') !!}");
+        </script>
+    @endif
+
+    <script>
+        $(document).ready(function() {
+            // Dark Mode
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme');
+
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                $('html').addClass('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                $('html').removeClass('dark');
+                localStorage.setItem('theme', 'light');
+            }
+
+            $('#toggleDark, #demoToggle').on('click', function() {
+                $('html').toggleClass('dark');
+                localStorage.setItem('theme', $('html').hasClass('dark') ? 'dark' : 'light');
+            });
+
+            // Modals: Location
+            $('#locationToggle').on('click', () => $('#locationOverlay').removeClass('hidden'));
+            $('#closeLocationModal').on('click', () => $('#locationOverlay').addClass('hidden'));
+            $('#citySelect').on('change', function() {
+                $('#selectedLocationText').text($(this).val());
+                $('#locationOverlay').addClass('hidden');
+            });
+            $('#locationOverlay').on('click', function(e) {
+                if (e.target === this) $(this).addClass('hidden');
+            });
+
+            // Modals: Cart
+            $('#cartToggle').on('click', () => $('#cartOverlay').removeClass('hidden'));
+            $('#closeCartModal').on('click', () => $('#cartOverlay').addClass('hidden'));
+            $('#cartOverlay').on('click', function(e) {
+                if (e.target === this) $(this).addClass('hidden');
+            });
+
+            // Modals: Login
+            $('#loginToggle').on('click', () => $('#loginOverlay').removeClass('hidden'));
+
+            $('#closeLoginModal').on('click', () => {
+                $('#loginOverlay').addClass('hidden');
+                $('#loginOverlay form')[0].reset();
+            });
+
+            $('#loginOverlay').on('click', function(e) {
+                if (e.target === this) {
+                    $(this).addClass('hidden');
+                    $('#loginOverlay form')[0].reset();
+                }
+            });
+
+            // Modals: Register
+            $('#registerToggle').on('click', () => $('#registerOverlay').removeClass('hidden'));
+
+            $('#closeRegisterModal').on('click', () => {
+                $('#registerOverlay').addClass('hidden');
+                $('#registerOverlay form')[0].reset(); // Reset register form
+            });
+
+            $('#registerOverlay').on('click', function(e) {
+                if (e.target.id === 'registerOverlay') {
+                    $(this).addClass('hidden');
+                    $('#registerOverlay form')[0].reset(); // Reset register form
+                }
+            });
+
+            // Switch Login <=> Register
+            $('.open-register').on('click', function() {
+                $('#loginOverlay').addClass('hidden');
+                $('#registerOverlay').removeClass('hidden');
+
+                // Reset both forms
+                $('#loginOverlay form')[0].reset();
+                $('#registerOverlay form')[0].reset();
+            });
+
+
+            // Product Slider
+            let $slides = $('#productSlider .slide');
+            let $dots = $('#productSlider .dot');
+            let currentIndex = 0;
+
+            function showSlide(index) {
+                $slides.css({
+                    opacity: '0',
+                    'z-index': '1',
+                    'pointer-events': 'none'
+                });
+                $slides.eq(index).css({
+                    opacity: '1',
+                    'z-index': '10',
+                    'pointer-events': 'auto'
+                });
+                $dots.removeClass('bg-orange-400').addClass('bg-gray-400');
+                $dots.eq(index).addClass('bg-orange-400');
+                currentIndex = index;
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % $slides.length;
+                showSlide(currentIndex);
+            }
+
+            $dots.on('click', function() {
+                showSlide($(this).index());
+            });
+
+            showSlide(currentIndex);
+            setInterval(nextSlide, 3000);
+
+            // Banner Slider
+            let $bannerSlides = $('.banner-slide');
+            let $bannerDots = $('.banner-dot');
+            let currentBanner = 0;
+            let bannerInterval;
+
+            function showBannerSlide(index) {
+                $bannerSlides.removeClass('opacity-100').addClass('opacity-0');
+                $bannerSlides.eq(index).removeClass('opacity-0').addClass('opacity-100');
+                $bannerDots.removeClass('bg-orange-500').addClass('bg-white');
+                $bannerDots.eq(index).removeClass('bg-white').addClass('bg-orange-500');
+                currentBanner = index;
+            }
+
+            function nextBannerSlide() {
+                currentBanner = (currentBanner + 1) % $bannerSlides.length;
+                showBannerSlide(currentBanner);
+            }
+
+            function startBannerSlide() {
+                bannerInterval = setInterval(nextBannerSlide, 5000);
+            }
+
+            function stopBannerSlide() {
+                clearInterval(bannerInterval);
+            }
+
+            $('.banner-prev').on('click', function() {
+                currentBanner = (currentBanner - 1 + $bannerSlides.length) % $bannerSlides.length;
+                showBannerSlide(currentBanner);
+            });
+
+            $('.banner-next').on('click', nextBannerSlide);
+            $bannerDots.on('click', function() {
+                showBannerSlide($(this).index());
+            });
+
+            $('.banner-container').on('mouseenter', stopBannerSlide).on('mouseleave', startBannerSlide);
+            startBannerSlide();
         });
     </script>
-@endif
-
-
 </body>
-
 </html>
