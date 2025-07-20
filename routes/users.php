@@ -64,13 +64,14 @@ Route::get('/payment', [IndexController::class, 'showPaymentPage'])->name('Payme
 Route::post('/custom-register', [IndexController::class, 'register'])->name('custom.register');
 Route::post('/custom-login', [IndexController::class, 'login'])->name('custom.login');
 Route::post('/custom-logout', [IndexController::class, 'logout'])->name('custom.logout');
-
+Route::post('/cart',[IndexController::class,'addCart'])->name('cart.add');
 Route::prefix('/user')->group(function () {
 Route::get('/{id}/profile', [IndexController::class, 'showProfile'])->name('user.profile');
 Route::put('/profile/update/{field}', [IndexController::class, 'updateField'])->name('user.updateField');
 Route::post('/wishlist/toggle', [IndexController::class, 'toggle'])->name('wishlist.toggle');
-Route::get('/{id}/wishlist',[IndexController::class, 'showWishlist'])->name('user.wishlist');
+Route::get('/wishlist',[IndexController::class, 'showWishlist'])->name('user.wishlist');
 Route::get('/{id}/orders', [IndexController::class, 'showOrders'])->name('user.orders');
 Route::get('/user/order/{id}', [IndexController::class, 'detailedShow'])->name('user.order.details');
 Route::get('/user/order/invoice/{id}', [IndexController::class, 'downloadInvoice'])->name('user.invoice.download');
+
 });

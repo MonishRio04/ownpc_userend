@@ -100,38 +100,72 @@
 
 <div class="w-full sticky top-0 z-50 bg-[#0B1D51] text-white shadow-md">
     <div class="container mx-auto px-16 py-5">
-        <nav class="flex flex-wrap items-center justify-between gap-4 text-base font-light">
-            <a href="/"
-                class="{{ Request::is('/') ? 'text-orange-500' : 'text-white' }} hover:text-orange-400 font-medium">HOME</a>
-
-            @foreach ($menu_categories as $category)
-                <div class="relative group">
-                    <a href="{{ route('category.product', $category->id) }}"
-                        class="hover:text-orange-500 font-medium block px-4 py-2 flex items-center gap-1">
-                        {{ $category->category_name }}
-                        @if ($category->subcategory->isNotEmpty())
-                            <i class="fa-solid fa-caret-down"></i>
-                        @endif
-                    </a>
-
-                    @if ($category->subcategory->isNotEmpty())
-                        <div
-                            class="absolute top-full left-0 bg-white text-black rounded shadow-md hidden group-hover:block z-50 min-w-[200px]">
-                            @foreach ($category->subcategory as $sub)
-                                <a href="{{ route('subcategory.product', $sub->id) }}"
-                                    class="block px-4 py-2 hover:text-orange-500 hover:bg-gray-100">
-                                    {{ $sub->subcategory_name }}
-                                </a>
-                            @endforeach
-                        </div>
-                    @endif
+        <nav class="flex justify-between items-center relative">
+       
+            <div class="relative">
+                <button id="toggleAllCategories" class="font-bold flex items-center gap-2">
+                    All Categories <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="allCategoriesDropdown"
+                    class="absolute top-full left-0 mt-2 bg-white text-black rounded shadow-md hidden min-w-[200px] z-50">
+        
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-600 hover:text-white hover:rounded">Electronics</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-600 hover:text-white hover:rounded">Fashion</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-600 hover:text-white hover:rounded">Books</a>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-600 hover:text-white hover:rounded">Home & Kitchen</a>
                 </div>
-            @endforeach
+            </div>
+           <div class="flex gap-5">
+            <a href="/"
+                class="{{ Request::is('/') ? 'text-orange-500' : 'text-white' }} hover:text-orange-400 font-medium px-4 py-2 flex items-center gap-1 ">HOME</a>
+
+           @foreach ($menu_categories as $category)
+    <div class="relative group">
+        <a href="{{ route('category.product', $category->id) }}"
+            class="{{ isset($activeCategoryId) && $activeCategoryId == $category->id ? 'text-orange-500' : 'text-white' }} hover:text-orange-400 font-medium px-4 py-2 flex items-center gap-1">
+            {{ $category->category_name }}
+            @if ($category->subcategory->isNotEmpty())
+                <i class="fa-solid fa-caret-down mt-[2px] text-sm"></i>
+            @endif
+        </a>
+
+        @if ($category->subcategory->isNotEmpty())
+            <div class="absolute top-full left-0 bg-white text-black rounded shadow-md hidden group-hover:block z-50 min-w-[200px]">
+                @foreach ($category->subcategory as $sub)
+                    <a href="{{ route('subcategory.product', $sub->id) }}"
+                        class="block px-4 py-2 hover:text-orange-500 hover:rounded">
+                        {{ $sub->subcategory_name }}
+                    </a>
+                @endforeach
+            </div>
+        @endif
+    </div>
+@endforeach
 
             <a href="{{ route('ContactUs') }}"
-                class="{{ request()->routeIs('ContactUs') ? 'text-orange-500 font-bold' : 'text-white' }} hover:text-orange-400 font-medium">
+                class="{{ request()->routeIs('ContactUs') ? 'text-orange-500 font-bold' : 'text-white' }} hover:text-orange-400 font-medium px-4 py-2 flex items-center gap-1">
                 CONTACT US
             </a>
+        </div>
         </nav>
     </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+        const toggleBtn = document.getElementById('toggleAllCategories');
+        const dropdown = document.getElementById('allCategoriesDropdown');
+
+        toggleBtn.addEventListener('click', function (e) {
+            e.stopPropagation(); // Prevent closing immediately
+            dropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!dropdown.contains(e.target) && !toggleBtn.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    });
+</script>

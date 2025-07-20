@@ -288,6 +288,40 @@
 
             $('.banner-container').on('mouseenter', stopBannerSlide).on('mouseleave', startBannerSlide);
             startBannerSlide();
+            $(document).on('click', '.wishlist-toggle', function () {
+            const button = $(this);
+            const productId = button.data('product-id');
+            const icon = button.find('i');
+
+            console.log('Clicked heart for product ID:', productId); // ✅ Debug line
+
+            $.ajax({
+                url: "{{ route('wishlist.toggle') }}",
+                method: "POST",
+                data: {
+                    product_id: productId,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function (response) {
+                    if (response.status === 'added') {
+                        icon.removeClass('text-gray-400').addClass('text-red-500');
+                        toastr.success('Added to wishlist!');
+                    } else if (response.status === 'removed') {
+                        icon.removeClass('text-red-500').addClass('text-gray-400');
+                        button.closest('.border').fadeOut(300, function () {
+                            $(this).remove();
+                            if ($('.wishlist-toggle').length === 0) {
+                                $('.wishlist-container').html('<p class="text-gray-500">No products in your wishlist.</p>');
+                            }
+                        });
+                        toastr.success('Removed from wishlist!');
+                    }
+                },
+                error: function () {
+                    toastr.error('Something went wrong. Please try again.');
+                }
+            });
+        });
         });
     </script>
 </body>

@@ -170,33 +170,54 @@
 
             <div class="md:w-3/4 h-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($products->take(6) as $product)
-                    <div
-                        class="bg-white dark:bg-gray-900 rounded shadow p-4 text-center hover:shadow-lg transition group relative">
+                    <div class="bg-white dark:bg-gray-900 rounded shadow p-4 text-center relative group">
 
+                        <!-- Wishlist Button -->
                         <button
                             class="wishlist-toggle absolute top-3 right-3 text-2xl z-10 {{ in_array($product->id, $wishlistedProductIds) ? 'text-red-500' : 'text-gray-300' }}"
                             data-product-id="{{ $product->id }}" title="Toggle Wishlist">
                             <i class="fa fa-heart"></i>
                         </button>
 
+                        <!-- Product Image with Hover Quick View -->
                         <div class="relative">
                             <img src="{{ asset($product->product_thambnail ?: 'images/pc.png') }}" alt="Product Image"
                                 class="mx-auto mb-3 w-full h-[180px] object-contain">
+
+                            <!-- Quick View Overlay on Image -->
+                            <a href="{{ route('showproduct', $product->id) }}"
+                                class="absolute top-0 left-0 w-full h-full flex items-center justify-center 
+                       opacity-0 group-hover:opacity-100 transition duration-300">
+                                <button class="bg-[#0B1D51] text-white px-4 py-2 rounded text-sm">
+                                    Quick View
+                                </button>
+                            </a>
                         </div>
 
-                        <h4 class="font-semibold text-gray-800 dark:text-white mb-1 truncate">{{ $product->product_name }}
+                        <!-- Product Name -->
+                        <h4 class="font-semibold text-gray-800 dark:text-white mb-1 truncate">
+                            {{ $product->product_name }}
                         </h4>
-                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                            ₹{{ number_format($product->selling_price) }}</p>
 
-                        <a href="{{ route('showproduct', $product->id) }}">
-                            <button
+                        <!-- Price -->
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                            ₹{{ number_format($product->selling_price) }}
+                        </p>
+
+                        <!-- Add to Cart Button -->
+                        <form action="{{ route('cart.add', $product->id) }}" method="post">
+                            @csrf
+                            <button type="submit"
                                 class="mt-2 bg-[#0B1D51] hover:bg-orange-600 text-white px-4 py-2 rounded text-sm transition w-1/2">
-                                Quick View
+                                Add to Cart
                             </button>
-                        </a>
+                        </form>
+
                     </div>
                 @endforeach
+
+
+
 
 
                 <div class="col-span-full my-4">
@@ -205,33 +226,53 @@
                 </div>
 
                 @foreach ($products->slice(6, 6) as $product)
-                    <div
-                        class="bg-white dark:bg-gray-900 rounded shadow p-4 text-center hover:shadow-lg transition group relative">
+                    <div class="bg-white dark:bg-gray-900 rounded shadow p-4 text-center relative group">
 
+                        <!-- Wishlist Button -->
                         <button
                             class="wishlist-toggle absolute top-3 right-3 text-2xl z-10 {{ in_array($product->id, $wishlistedProductIds) ? 'text-red-500' : 'text-gray-300' }}"
                             data-product-id="{{ $product->id }}" title="Toggle Wishlist">
                             <i class="fa fa-heart"></i>
                         </button>
 
+                        <!-- Product Image with Hover Quick View -->
                         <div class="relative">
                             <img src="{{ asset($product->product_thambnail ?: 'images/pc.png') }}" alt="Product Image"
                                 class="mx-auto mb-3 w-full h-[180px] object-contain">
+
+                            <!-- Quick View Overlay on Image -->
+                            <a href="{{ route('showproduct', $product->id) }}"
+                                class="absolute top-0 left-0 w-full h-full flex items-center justify-center 
+                       opacity-0 group-hover:opacity-100 transition duration-300">
+                                <button class="bg-[#0B1D51] text-white px-4 py-2 rounded text-sm">
+                                    Quick View
+                                </button>
+                            </a>
                         </div>
 
-                        <h4 class="font-semibold text-gray-800 dark:text-white mb-1 truncate">{{ $product->product_name }}
+                        <!-- Product Name -->
+                        <h4 class="font-semibold text-gray-800 dark:text-white mb-1 truncate">
+                            {{ $product->product_name }}
                         </h4>
-                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                            ₹{{ number_format($product->selling_price) }}</p>
 
-                        <a href="{{ route('showproduct', $product->id) }}">
-                            <button
+                        <!-- Price -->
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                            ₹{{ number_format($product->selling_price) }}
+                        </p>
+
+                        <!-- Add to Cart Button -->
+                        <form action="{{ route('cart.add', $product->id) }}" method="post">
+                            @csrf
+                            <button type="submit"
                                 class="mt-2 bg-[#0B1D51] hover:bg-orange-600 text-white px-4 py-2 rounded text-sm transition w-1/2">
-                                Quick View
+                                Add to Cart
                             </button>
-                        </a>
+                        </form>
+
                     </div>
                 @endforeach
+
+
             </div>
 
         </div>
@@ -265,33 +306,6 @@
                     });
                 });
 
-
-
-                $(document).on('click', '.wishlist-toggle', function() {
-                    const button = $(this);
-                    const productId = button.data('product-id');
-
-                    $.ajax({
-                        url: "{{ route('wishlist.toggle') }}",
-                        method: "POST",
-                        data: {
-                            product_id: productId,
-                            _token: "{{ csrf_token() }}"
-                        },
-                        success: function(response) {
-                            if (response.status === 'added') {
-                                button.removeClass('text-gray-400').addClass('text-red-500');
-                                toastr.success('Added to wishlist!');
-                            } else if (response.status === 'removed') {
-                                button.removeClass('text-red-500').addClass('text-gray-400');
-                                toastr.success('Removed from wishlist!');
-                            }
-                        },
-                        error: function() {
-                            toastr.error('Something went wrong. Please try again.');
-                        }
-                    });
-                });
             });
         </script>
     @endpush

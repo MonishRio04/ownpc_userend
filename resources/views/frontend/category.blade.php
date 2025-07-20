@@ -6,15 +6,21 @@
     </button>
 <div class="container mx-auto px-4 py-6">
 
-    <h2 class="text-2xl font-bold mb-4 text-gray-800">{{ $category->name }}</h2>
+    <h2 class="text-xl font-bold mb-6 text-center mt-10">{{ $category->category_name }}</h2>
 
     @if ($category->products->count() > 0)
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
             @foreach ($category->products as $product)
-                <div class=" p-4 rounded shadow hover:shadow-md">
-                    <img src="{{ asset($product->product_thambnail) }}" alt="{{ $product->product_name }}" class="w-full h-40 object-cover mb-2">
+                <div class=" p-4 rounded shadow hover:shadow-md text-center">
+                    <img src="{{ asset($product->product_thambnail) }}" alt="{{ $product->product_name }}" class="w-full h-40 object-contain mb-2">
                     <h3 class="text-lg font-semibold text-gray-700">{{ $product->product_name }}</h3>
                     <p class="text-orange-500 font-bold">₹{{ $product->selling_price }}</p>
+                      <a href="{{ route('showproduct', $product->id) }}">
+
+                    <button
+                        class="mt-2 bg-[#0B1D51] hover:bg-orange-600 text-white px-4 py-2 rounded text-sm transition w-1/2">Quick
+                        View</button>
+                </a>
                 </div>
             @endforeach
         </div>

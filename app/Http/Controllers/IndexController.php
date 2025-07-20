@@ -323,9 +323,14 @@ class IndexController extends Controller
             return response()->json(['status' => 'added']);
         }
     }
-    public function showWishlist($id)
-    {
-        $wishlistProducts = Product::whereIn('id', Wishlist::where('user_id', Auth::id())->pluck('product_id'))->get();
-        return view('user.wishlist', compact('wishlistProducts'));
+    public function showWishlist()
+{
+    $wishlistProducts = Product::whereIn('id', Wishlist::where('user_id', Auth::id())->pluck('product_id'))->get();
+
+    return view('user.wishlist', compact('wishlistProducts'));
+}
+
+    public function addCart(){
+        return redirect()->back()->with('success','Product added to cart');
     }
 }
