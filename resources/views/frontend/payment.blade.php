@@ -1,25 +1,25 @@
 @extends('layout.app')
 @section('content')
-    <button id="goTopBtn" class="fixed bottom-6 right-6 text-orange-400 text-3xl font-bold z-50 hidden">
+    <button id="goTopBtn" class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 text-orange-400 text-2xl sm:text-3xl font-bold z-50 hidden">
         <i class="fa-solid fa-arrow-up-from-bracket"></i>
     </button>
-    <div class="relative w-full h-[400px] bg-cover bg-center flex items-center px-16"
+    <div class="relative w-full h-[200px] sm:h-[300px] md:h-[400px] bg-cover bg-center flex items-center px-4 sm:px-8 md:px-16"
         style="background-image: url('{{ asset('images/payment.webp') }}');">
-        <div class="z-10 max-w-xl text-black space-y-4">
-            <p class="text-xl">
-                <span class="text-4xl font-bold">Payment</span> Page
+        <div class="z-10 max-w-xl text-black space-y-2 sm:space-y-4">
+            <p class="text-base sm:text-xl">
+                <span class="text-2xl sm:text-3xl md:text-4xl font-bold">Payment</span> Page
             </p>
-            <p>
+            <p class="text-sm sm:text-base">
                 <a href="/" class="text-orange-400 font-bold">HOME</a>
-                <span class="mx-2 text-black">
+                <span class="mx-1 sm:mx-2 text-black">
                     <i class="fa-solid fa-greater-than text-xs font-bold leading-none"></i>
                 </span>
                 <span class="font-bold">PAYMENT PAGE</span>
             </p>
         </div>
     </div>
-    <div class="max-w-5xl mx-auto px-4 py-10">
-        <h1 class="text-3xl font-bold mb-6 text-center">Payment</h1>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
+        <h1 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center">Payment</h1>
         <form action="{{ route('place.order') }}" method="POST" onsubmit="return validatePaymentForm();">
             @csrf
             <input type="hidden" name="name" value="{{ Auth::user()->name }}">
@@ -30,26 +30,26 @@
             <input type="hidden" name="post_code" value="000000">
             <input type="hidden" id="payment_method" name="payment_method" value="COD">
             <div
-                class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 px-10 bg-white dark:bg-black dark:text-white shadow rounded p-4">
+                class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6 px-4 sm:px-6 md:px-10 bg-white dark:bg-black dark:text-white shadow rounded p-3 sm:p-4">
                 <a href="#cod"
-                    class="tab-button block text-center rounded-lg shadow px-4 py-6 font-semibold cursor-pointer transition duration-200">Cash
+                    class="tab-button block text-center rounded-lg shadow px-3 py-4 sm:px-4 sm:py-6 font-semibold cursor-pointer transition duration-200 text-sm sm:text-base">Cash
                     on Delivery</a>
                 <a href="#card"
-                    class="tab-button block text-center rounded-lg shadow px-4 py-6 font-semibold cursor-pointer transition duration-200">Online
+                    class="tab-button block text-center rounded-lg shadow px-3 py-4 sm:px-4 sm:py-6 font-semibold cursor-pointer transition duration-200 text-sm sm:text-base">Online
                     Payment</a>
             </div>
-            <div id="cod" class="tab-content bg-white shadow rounded p-6 dark:bg-black dark:text-white">
-                <h2 class="text-xl font-semibold mb-4">Cash on Delivery</h2>
-                <label class="flex items-center gap-2 text-gray-700">
-                    <input type="checkbox" class="w-5 h-5 accent-blue-500" data-required>
+            <div id="cod" class="tab-content bg-white shadow rounded p-4 sm:p-6 dark:bg-black dark:text-white">
+                <h2 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Cash on Delivery</h2>
+                <label class="flex items-center gap-2 text-gray-700 text-sm sm:text-base">
+                    <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-blue-500" data-required>
                     <span>I agree to pay by Cash on Delivery (COD).</span>
                 </label>
-                <button type="submit" class="mt-6 bg-orange-400 hover:bg-[#0B1D51] text-white px-6 py-3 rounded">
+                <button type="submit" class="mt-4 sm:mt-6 bg-orange-400 hover:bg-[#0B1D51] text-white px-4 py-2 sm:px-6 sm:py-3 rounded text-sm sm:text-base">
                     Place Order
                 </button>
             </div>
-            <div id="card" class="tab-content hidden bg-white shadow rounded p-6 dark:bg-black dark:text-white">
-                <div class="space-y-5">
+            <div id="card" class="tab-content hidden bg-white shadow rounded p-4 sm:p-6 dark:bg-black dark:text-white">
+                <div class="space-y-3 sm:space-y-5">
                     @foreach ([
             'card_name' => 'e.g., John Doe',
             'card_number' => 'xxxx-xxxx-xxxx-xxxx',
@@ -57,16 +57,16 @@
             'expiry' => 'MM/YY',
         ] as $name => $placeholder)
                         <div>
-                            <label class="block font-semibold text-xl text-gray-700 mb-1 capitalize">
+                            <label class="block font-semibold text-lg sm:text-xl text-gray-700 mb-1 capitalize">
                                 {{ str_replace('_', ' ', $name) }}
                             </label>
                             <input type="text" name="{{ $name }}" placeholder="{{ $placeholder }}"
-                                class="w-full px-4 py-3 rounded border border-gray-300 bg-gray-100 focus:outline-none card-field"
+                                class="w-full px-3 py-2 sm:px-4 sm:py-3 rounded border border-gray-300 bg-gray-100 focus:outline-none card-field text-sm sm:text-base"
                                 data-required>
                         </div>
                     @endforeach
                 </div>
-                <button type="submit" class="mt-6 bg-orange-400 hover:bg-[#0B1D51] text-white px-6 py-3 rounded">
+                <button type="submit" class="mt-4 sm:mt-6 bg-orange-400 hover:bg-[#0B1D51] text-white px-4 py-2 sm:px-6 sm:py-3 rounded text-sm sm:text-base">
                     Pay Now
                 </button>
             </div>

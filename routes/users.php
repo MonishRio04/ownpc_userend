@@ -65,6 +65,7 @@ Route::post('/custom-register', [IndexController::class, 'register'])->name('cus
 Route::post('/custom-login', [IndexController::class, 'login'])->name('custom.login');
 Route::post('/custom-logout', [IndexController::class, 'logout'])->name('custom.logout');
 Route::post('/cart',[IndexController::class,'addCart'])->name('cart.add');
+Route::get('/cart/refresh', [IndexController::class, 'refreshCart'])->name('cart.refresh');
 Route::prefix('/user')->group(function () {
 Route::get('/{id}/profile', [IndexController::class, 'showProfile'])->name('user.profile');
 Route::put('/profile/update/{field}', [IndexController::class, 'updateField'])->name('user.updateField');

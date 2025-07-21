@@ -322,7 +322,42 @@
                 }
             });
         });
-        });
-    </script>
+  
+  
+        $('.addToCartBtn').on('click', function (e) {
+    e.preventDefault();
+
+    var product_id = $(this).data('id');
+
+    $.ajax({
+        url: "{{ route('cart.add') }}",
+        method: 'POST',
+        data: {
+            _token: '{{ csrf_token() }}',
+            product_id: product_id,
+            quantity: 1,
+        },
+        success: function (response) {
+            if (response.status === 'success') {
+                toastr.success("Product added to Cart!");
+                loadCartSection();
+            } else {
+                toastr.error("Something went wrong!");
+            }
+        },
+        error: function () {
+            toastr.error("Server error!");
+        }
+    });
+});
+
+function loadCartSection() {
+    $('#cartOverlayContent').load("{{ route('cart.refresh') }}");
+}
+
+
+    });
+</script>
+
 </body>
 </html>

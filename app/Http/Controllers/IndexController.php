@@ -330,7 +330,31 @@ class IndexController extends Controller
     return view('user.wishlist', compact('wishlistProducts'));
 }
 
-    public function addCart(){
-        return redirect()->back()->with('success','Product added to cart');
-    }
+   public function addCart(Request $request)
+{
+    $product = Product::findOrFail($request->product_id); // FIXED
+    $price = $product->discount_price ?? $product->selling_price;
+
+    Cart::add([
+        'id' => $product->id,
+        'name' => $product->product_name,
+        'qty' => 1,
+        'price' => $price,
+        'weight' => 1,
+        'options' => [
+            'image' => $product->product_thambnail,
+        ],
+    ]);
+
+    return response()->json(['status' => 'success']);
+}
+
+public function refreshCart()
+{
+    $cart = Cart::content();
+    $total = Cart::total();
+
+    return view('layout.cart_html', compact('cart', 'total'))->render();
+}
+
 }

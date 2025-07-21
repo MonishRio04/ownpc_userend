@@ -1,13 +1,15 @@
 @extends('layout.app')
 
 @section('content')
+<div class="px-4 sm:px-6 lg:px-8">
+
     <button id="goTopBtn" class="fixed bottom-6 right-6 text-orange-400 text-3xl font-bold z-50 hidden">
         <i class="fa-solid fa-arrow-up-from-bracket"></i>
     </button>
 
     <div class="w-full bg-white shadow rounded dark:bg-gray-900 py-2 relative">
         <div class="max-w-7xl mx-auto px-0 relative">
-            <div class="banner-container h-[400px] relative overflow-hidden">
+         <div class="banner-container h-[180px] sm:h-[250px] md:h-[300px] lg:h-[400px] relative overflow-hidden">
                 @foreach ($sliders as $index => $banner)
                     <div class="banner-slide flex items-center justify-between absolute inset-0 transition-opacity duration-500 {{ $index === 0 ? 'opacity-100' : 'opacity-0' }}"
                         id="banner-{{ $index }}">
@@ -42,12 +44,12 @@
     </div>
 
 
-    <h1 class="text-center text-4xl pt-16 dark:text-white">Our <span class="font-bold">New Products</span></h1>
+     <h1 class="text-center text-2xl sm:text-3xl lg:text-4xl pt-8 sm:pt-12 lg:pt-16 dark:text-white">Our <span class="font-bold">New Products</span></h1>
 
-    <div class="container mx-auto px-16 py-10">
-        <div class="flex flex-col md:flex-row gap-8">
+    <div class="container mx-auto px-4 sm:px-8 lg:px-16 py-6 sm:py-8 lg:py-10">
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-8">
 
-            <div class="md:w-1/4 bg-blue-50 dark:bg-gray-800 p-4 rounded shadow text-left space-y-6">
+          <div class="w-full md:w-1/4 bg-blue-50 dark:bg-gray-800 p-3 sm:p-4 rounded shadow text-left space-y-4 sm:space-y-6 hidden sm:block">
 
 
                 <div>
@@ -168,129 +170,131 @@
 
             </div>
 
-            <div class="md:w-3/4 h-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach ($products->take(6) as $product)
-                    <div class="bg-white dark:bg-gray-900 rounded shadow p-4 text-center relative group">
+           <div class="w-full md:w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+    @foreach ($products->take(6) as $product)
+        <div class="bg-white dark:bg-gray-900 rounded shadow p-2 sm:p-3 md:p-4 text-center relative group">
+            <!-- Wishlist Button -->
+            <button
+                class="wishlist-toggle absolute top-2 right-2 sm:top-3 sm:right-3 text-xl sm:text-2xl z-10 {{ in_array($product->id, $wishlistedProductIds) ? 'text-red-500' : 'text-gray-300' }}"
+                data-product-id="{{ $product->id }}" title="Toggle Wishlist">
+                <i class="fa fa-heart"></i>
+            </button>
 
-                        <!-- Wishlist Button -->
-                        <button
-                            class="wishlist-toggle absolute top-3 right-3 text-2xl z-10 {{ in_array($product->id, $wishlistedProductIds) ? 'text-red-500' : 'text-gray-300' }}"
-                            data-product-id="{{ $product->id }}" title="Toggle Wishlist">
-                            <i class="fa fa-heart"></i>
-                        </button>
+            <!-- Product Image with Hover Quick View -->
+            <div class="relative">
+                <img src="{{ asset($product->product_thambnail ?: 'images/pc.png') }}" alt="Product Image"
+                    class="mx-auto mb-2 sm:mb-3 w-full h-[100px] sm:h-[120px] md:h-[150px] lg:h-[180px] object-contain">
 
-                        <!-- Product Image with Hover Quick View -->
-                        <div class="relative">
-                            <img src="{{ asset($product->product_thambnail ?: 'images/pc.png') }}" alt="Product Image"
-                                class="mx-auto mb-3 w-full h-[180px] object-contain">
-
-                            <!-- Quick View Overlay on Image -->
-                            <a href="{{ route('showproduct', $product->id) }}"
-                                class="absolute top-0 left-0 w-full h-full flex items-center justify-center 
-                       opacity-0 group-hover:opacity-100 transition duration-300">
-                                <button class="bg-[#0B1D51] text-white px-4 py-2 rounded text-sm">
-                                    Quick View
-                                </button>
-                            </a>
-                        </div>
-
-                        <!-- Product Name -->
-                        <h4 class="font-semibold text-gray-800 dark:text-white mb-1 truncate">
-                            {{ $product->product_name }}
-                        </h4>
-
-                        <!-- Price -->
-                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                            ₹{{ number_format($product->selling_price) }}
-                        </p>
-
-                        <!-- Add to Cart Button -->
-                        <form action="{{ route('cart.add', $product->id) }}" method="post">
-                            @csrf
-                            <button type="submit"
-                                class="mt-2 bg-[#0B1D51] hover:bg-orange-600 text-white px-4 py-2 rounded text-sm transition w-1/2">
-                                Add to Cart
-                            </button>
-                        </form>
-
-                    </div>
-                @endforeach
-
-
-
-
-
-                <div class="col-span-full my-4">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="Mid Section Banner"
-                        class="w-full h-auto rounded shadow-md object-cover">
-                </div>
-
-                @foreach ($products->slice(6, 6) as $product)
-                    <div class="bg-white dark:bg-gray-900 rounded shadow p-4 text-center relative group">
-
-                        <!-- Wishlist Button -->
-                        <button
-                            class="wishlist-toggle absolute top-3 right-3 text-2xl z-10 {{ in_array($product->id, $wishlistedProductIds) ? 'text-red-500' : 'text-gray-300' }}"
-                            data-product-id="{{ $product->id }}" title="Toggle Wishlist">
-                            <i class="fa fa-heart"></i>
-                        </button>
-
-                        <!-- Product Image with Hover Quick View -->
-                        <div class="relative">
-                            <img src="{{ asset($product->product_thambnail ?: 'images/pc.png') }}" alt="Product Image"
-                                class="mx-auto mb-3 w-full h-[180px] object-contain">
-
-                            <!-- Quick View Overlay on Image -->
-                            <a href="{{ route('showproduct', $product->id) }}"
-                                class="absolute top-0 left-0 w-full h-full flex items-center justify-center 
-                       opacity-0 group-hover:opacity-100 transition duration-300">
-                                <button class="bg-[#0B1D51] text-white px-4 py-2 rounded text-sm">
-                                    Quick View
-                                </button>
-                            </a>
-                        </div>
-
-                        <!-- Product Name -->
-                        <h4 class="font-semibold text-gray-800 dark:text-white mb-1 truncate">
-                            {{ $product->product_name }}
-                        </h4>
-
-                        <!-- Price -->
-                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                            ₹{{ number_format($product->selling_price) }}
-                        </p>
-
-                        <!-- Add to Cart Button -->
-                        <form action="{{ route('cart.add', $product->id) }}" method="post">
-                            @csrf
-                            <button type="submit"
-                                class="mt-2 bg-[#0B1D51] hover:bg-orange-600 text-white px-4 py-2 rounded text-sm transition w-1/2">
-                                Add to Cart
-                            </button>
-                        </form>
-
-                    </div>
-                @endforeach
-
-
+                <!-- Quick View Overlay on Image -->
+                <a href="{{ route('showproduct', $product->id) }}"
+                    class="absolute top-0 left-0 w-full h-full flex items-center justify-center 
+                    opacity-0 group-hover:opacity-100 transition duration-300">
+                    <button class="bg-[#0B1D51] text-white px-2 py-1 sm:px-3 sm:py-1 md:px-4 md:py-2 rounded text-xs sm:text-sm">
+                        Quick View
+                    </button>
+                </a>
             </div>
+
+            <!-- Product Name -->
+            <h4 class="font-semibold text-sm sm:text-base text-gray-800 dark:text-white mb-1 truncate">
+                {{ $product->product_name }}
+            </h4>
+
+            <!-- Price -->
+            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mb-1 sm:mb-2">
+                ₹{{ number_format($product->selling_price) }}
+            </p>
+
+            <!-- Add to Cart Button -->
+            <button type="button"
+                class="addToCartBtn bg-[#0B1D51] text-white px-2 py-1 sm:px-3 sm:py-1 md:px-4 md:py-2 rounded text-xs sm:text-sm"
+                data-id="{{ $product->id }}"
+                data-name="{{ $product->product_name }}"
+                data-price="{{ $product->discount_price ?? $product->selling_price }}">
+                Add to Cart
+            </button>
+        </div>
+    @endforeach
+
+    <div class="col-span-1 sm:col-span-2 lg:col-span-3 m-2 sm:m-3 md:m-4">
+        <img src="{{ asset('images/logo.jpg') }}" alt="Mid Section Banner" class="w-full h-auto rounded shadow-md object-cover">
+    </div>
+
+    @foreach ($products->slice(6, 6) as $product)
+        <div class="bg-white dark:bg-gray-900 rounded shadow p-2 sm:p-3 md:p-4 text-center relative group">
+            <!-- Wishlist Button -->
+            <button
+                class="wishlist-toggle absolute top-2 right-2 sm:top-3 sm:right-3 text-xl sm:text-2xl z-10 {{ in_array($product->id, $wishlistedProductIds) ? 'text-red-500' : 'text-gray-300' }}"
+                data-product-id="{{ $product->id }}" title="Toggle Wishlist">
+                <i class="fa fa-heart"></i>
+            </button>
+
+            <!-- Product Image with Hover Quick View -->
+            <div class="relative">
+                <img src="{{ asset($product->product_thambnail ?: 'images/pc.png') }}" alt="Product Image"
+                    class="mx-auto mb-2 sm:mb-3 w-full h-[100px] sm:h-[120px] md:h-[150px] lg:h-[180px] object-contain">
+
+                <!-- Quick View Overlay on Image -->
+                <a href="{{ route('showproduct', $product->id) }}"
+                    class="absolute top-0 left-0 w-full h-full flex items-center justify-center 
+                    opacity-0 group-hover:opacity-100 transition duration-300">
+                    <button class="bg-[#0B1D51] text-white px-2 py-1 sm:px-3 sm:py-1 md:px-4 md:py-2 rounded text-xs sm:text-sm">
+                        Quick View
+                    </button>
+                </a>
+            </div>
+
+            <!-- Product Name -->
+            <h4 class="font-semibold text-sm sm:text-base text-gray-800 dark:text-white mb-1 truncate">
+                {{ $product->product_name }}
+            </h4>
+
+            <!-- Price -->
+            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mb-1 sm:mb-2">
+                ₹{{ number_format($product->selling_price) }}
+            </p>
+
+            <!-- Add to Cart Button -->
+            <button type="button"
+                class="addToCartBtn bg-[#0B1D51] text-white px-2 py-1 sm:px-3 sm:py-1 md:px-4 md:py-2 rounded text-xs sm:text-sm"
+                data-id="{{ $product->id }}"
+                data-name="{{ $product->product_name }}"
+                data-price="{{ $product->discount_price ?? $product->selling_price }}">
+                Add to Cart
+            </button>
+        </div>
+    @endforeach
+</div>
 
         </div>
     </div>
-    <div class="relative w-full h-[500px] bg-fixed bg-center bg-cover my-12"
-        style="background-image: url('{{ asset('images/logo.jpg') }}');">
-        <div class="flex h-full container mx-auto">
-            <div class="w-1/2 flex justify-center items-center p-4">
+ <div class="relative w-full bg-fixed bg-center bg-cover my-12 min-h-[300px]"
+    style="background-image: url('{{ asset('images/logo.jpg') }}');">
+    
+    <!-- Semi-transparent overlay for better contrast -->
+    <div class="absolute inset-0 bg-black/20"></div>
+    
+    <!-- Content container with responsive layout -->
+    <div class="relative container mx-auto h-full">
+        <div class="flex flex-col sm:flex-row h-full py-8">
+            <!-- Image 1 - Shows on all screens -->
+            <div class="w-full sm:w-1/2 flex justify-center items-center p-4">
                 <img src="{{ asset('images/pc.png') }}" alt="PC 1"
-                    class="w-full max-w-md h-auto rounded shadow-lg" />
+                    class="w-full max-w-xs sm:max-w-md h-auto rounded-lg shadow-xl" />
             </div>
-            <div class="w-1/2 flex justify-center items-center p-4">
+            
+            <!-- Image 2 - Shows on all screens -->
+            <div class="w-full sm:w-1/2 flex justify-center items-center p-4">
                 <img src="{{ asset('images/pc2.jpg') }}" alt="PC 2"
-                    class="w-full max-w-md h-auto rounded shadow-lg" />
+                    class="w-full max-w-xs sm:max-w-md h-auto rounded-lg shadow-xl" />
             </div>
         </div>
     </div>
+</div>
+</div>
 
+</div>
+@endsection
 
     @push('scripts')
         <script>
@@ -309,4 +313,4 @@
             });
         </script>
     @endpush
-@endsection
+
