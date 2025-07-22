@@ -57,7 +57,7 @@
                                 @else
                                 @php
                                 $amount = $item->selling_price - $item->discount_price;
-                                $discount = ($amount/$item->selling_price)*100;
+                                $discount = $item->selling_price?($amount/$item->selling_price)*100:0;
                                 @endphp
                                 <span class="badge rounded-pill bg-danger">{{round($discount)}}%</span>
                                 @endif
