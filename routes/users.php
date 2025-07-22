@@ -29,18 +29,11 @@ Route::get('/aboutus', function () {
     return view('frontend.about');
 })->name('AboutUs');
 
-
 Route::get('/contactus', [IndexController::class, 'Contactus']);
-
-
-
 
 Route::get('/terms', function () {
     return view('frontend.terms');
 })->name('Terms');
-
-
-
 
 Route::get('/help', function () {
     return view('frontend.help');
@@ -56,23 +49,30 @@ Route::get('/category/{id}/', [IndexController::class, 'CategoryProduct'])->name
 Route::get('/subcategory/{id}', [IndexController::class, 'SubCategoryProduct'])->name('subcategory.product');
 Route::get('/product/{id}', [IndexController::class, 'ShowProduct'])->name('showproduct');
 Route::get('/contactus', [IndexController::class, 'Contactus'])->name('ContactUs');
-Route::get('/checkout', [IndexController::class, 'Checkout'])->name('checkout');
 Route::post('/ajax/add-to-cart', [IndexController::class, 'ajaxAddToCart'])->name('ajax.add.to.cart');
 Route::post('/ajax/remove-cart', [IndexController::class, 'removeCart'])->name('ajax.cart.remove');
-Route::post('/place-order', [IndexController::class, 'placeOrder'])->name('place.order');
-Route::get('/payment', [IndexController::class, 'showPaymentPage'])->name('Payment');
 Route::post('/custom-register', [IndexController::class, 'register'])->name('custom.register');
 Route::post('/custom-login', [IndexController::class, 'login'])->name('custom.login');
-Route::post('/custom-logout', [IndexController::class, 'logout'])->name('custom.logout');
 Route::post('/cart',[IndexController::class,'addCart'])->name('cart.add');
 Route::get('/cart/refresh', [IndexController::class, 'refreshCart'])->name('cart.refresh');
-Route::prefix('/user')->group(function () {
-Route::get('/{id}/profile', [IndexController::class, 'showProfile'])->name('user.profile');
-Route::put('/profile/update/{field}', [IndexController::class, 'updateField'])->name('user.updateField');
-Route::post('/wishlist/toggle', [IndexController::class, 'toggle'])->name('wishlist.toggle');
-Route::get('/wishlist',[IndexController::class, 'showWishlist'])->name('user.wishlist');
-Route::get('/{id}/orders', [IndexController::class, 'showOrders'])->name('user.orders');
-Route::get('/user/order/{id}', [IndexController::class, 'detailedShow'])->name('user.order.details');
-Route::get('/user/order/invoice/{id}', [IndexController::class, 'downloadInvoice'])->name('user.invoice.download');
+Route::post('sort/change',[IndexController::class,'sortOrderChange'])->name('update.sort');
 
-});
+
+
+    Route::get('/checkout', [IndexController::class, 'Checkout'])->name('checkout');
+    Route::post('/place-order', [IndexController::class, 'placeOrder'])->name('place.order');
+    Route::get('/payment', [IndexController::class, 'showPaymentPage'])->name('Payment');
+    Route::post('/custom-logout', [IndexController::class, 'logout'])->name('custom.logout');
+    
+    
+    Route::prefix('/user')->group(function () {
+        Route::get('/{id}/profile', [IndexController::class, 'showProfile'])->name('user.profile');
+        Route::put('/profile/update/{field}', [IndexController::class, 'updateField'])->name('user.updateField');
+        Route::post('/wishlist/toggle', [IndexController::class, 'toggle'])->name('wishlist.toggle');
+        Route::get('/wishlist',[IndexController::class, 'showWishlist'])->name('user.wishlist');
+        Route::get('/{id}/orders', [IndexController::class, 'showOrders'])->name('user.orders');
+        Route::get('/order/{id}', [IndexController::class, 'detailedShow'])->name('user.order.details');
+        Route::get('/order/invoice/{id}', [IndexController::class, 'downloadInvoice'])->name('user.invoice.download');
+    });
+
+Route::post('sort/change',[IndexController::class,'sortOrderChange'])->name('update.sort');

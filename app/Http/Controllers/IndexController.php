@@ -46,8 +46,12 @@ class IndexController extends Controller
 
     public function CategoryProduct($id)
     {
+         $userId = auth()->id();
         $category = Category::with('products')->findOrFail($id);
-        return view('frontend.category', compact('category'));
+         $wishlistedProductIds = $userId
+            ? \App\Models\Wishlist::where('user_id', $userId)->pluck('product_id')->toArray()
+            : [];
+        return view('frontend.category', compact('category','wishlistedProductIds'));
     }
 
     public function SubCategoryProduct($id)
@@ -325,6 +329,9 @@ class IndexController extends Controller
     }
     public function showWishlist()
 {
+     if (!Auth::check()) {
+            return redirect()->back()->with('error', 'Please log in to continue.');
+        }
     $wishlistProducts = Product::whereIn('id', Wishlist::where('user_id', Auth::id())->pluck('product_id'))->get();
 
     return view('user.wishlist', compact('wishlistProducts'));
@@ -332,7 +339,7 @@ class IndexController extends Controller
 
    public function addCart(Request $request)
 {
-    $product = Product::findOrFail($request->product_id); // FIXED
+    $product = Product::findOrFail($request->product_id); 
     $price = $product->discount_price ?? $product->selling_price;
 
     Cart::add([
@@ -356,5 +363,11 @@ public function refreshCart()
 
     return view('layout.cart_html', compact('cart', 'total'))->render();
 }
-
+public function sortOrderChange(Request $request){
+  
+   $categoryId=$request->category_id;
+   $sortorder=$request->sort;
+   category::findOrFail($categoryId)->update(['sort_order'=>$sortorder]);
+    return redirect()->back(); 
+}
 }

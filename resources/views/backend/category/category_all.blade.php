@@ -35,7 +35,9 @@
                             <th>Sl.No</th>
                             <th>Category Name</th>
                             <th>Category Image</th>
+                            <th>Sort Order</th>
                             <th>Action</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -44,6 +46,11 @@
                             <td>{{$key+1}}</td>
                             <td>{{$item->category_name}}</td>
                             <td><img src="{{asset($item->category_image)}}" style="width:70px; height:40px;" alt=""></td>
+                            <form method="post" action="{{route('update.sort')}}">
+                            @csrf
+                            <td><input type="number" name="sort"value="{{$item->sort_order}}"><input type="hidden" value="{{$item->id}}" name="category_id">
+                            <button type="submit">save</button></td>
+                            </form>
                             <td>
                                 <a href="{{route('edit.category',$item->id)}}" class="btn btn-info">Edit</a>
                                 <a href="{{route('delete.category',$item->id)}}" class="btn btn-danger" id="delete">Delete</a>

@@ -93,26 +93,31 @@
             $('#' + tabId).find('[data-required]').attr('required', 'required');
         }
 
-        function validatePaymentForm() {
-            const visibleTab = $('.tab-content:visible');
-            let valid = true;
+       function validatePaymentForm() {
+    const visibleTab = $('.tab-content:visible');
+    let valid = true;
 
-            visibleTab.find('[data-required]').each(function() {
-                if ($(this).is(':checkbox') && !$(this).is(':checked')) {
-                    alert("Please accept the checkbox.");
-                    $(this).focus();
-                    valid = false;
-                    return false;
-                } else if ($(this).is(':text') && !$(this).val().trim()) {
-                    alert("Please fill all required fields.");
-                    $(this).focus();
-                    valid = false;
-                    return false;
-                }
-            });
+    visibleTab.find('[data-required]').each(function () {
+        const $field = $(this);
 
-            return valid;
+        if ($field.is(':checkbox') && !$field.is(':checked')) {
+            alert("Please accept the checkbox.");
+            $field.focus();
+            valid = false;
+            return false;
         }
+
+        if ($field.is(':text') && !$field.val().trim()) {
+            alert("Please fill all required fields.");
+            $field.focus();
+            valid = false;
+            return false;
+        }
+    });
+
+    return valid;
+}
+
 
         const goTopBtn = document.getElementById('goTopBtn');
         window.addEventListener('scroll', () => {
