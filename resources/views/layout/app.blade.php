@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{asset('logo/logo_square1.png')}}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -216,7 +220,7 @@
             });
 
 
-            // Product Slider
+           // Product Slider
             let $slides = $('#productSlider .slide');
             let $dots = $('#productSlider .dot');
             let currentIndex = 0;
@@ -233,7 +237,7 @@
                     'pointer-events': 'auto'
                 });
                 $dots.removeClass('bg-orange-400').addClass('bg-gray-400');
-                $dots.eq(index).addClass('bg-orange-400');
+                $dots.eq(index).removeClass('bg-gray-400').addClass('bg-orange-400');
                 currentIndex = index;
             }
 
@@ -242,7 +246,7 @@
                 showSlide(currentIndex);
             }
 
-            $dots.on('click', function() {
+            $dots.on('click', function () {
                 showSlide($(this).index());
             });
 

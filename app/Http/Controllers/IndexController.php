@@ -32,7 +32,7 @@ class IndexController extends Controller
         $data['wishlistedProductIds'] = $userId
             ? \App\Models\Wishlist::where('user_id', $userId)->pluck('product_id')->toArray()
             : [];
-        return view("frontend.welcome", $data);
+        return view("frontend.index", $data);
     }
 
 
