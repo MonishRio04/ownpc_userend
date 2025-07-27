@@ -205,11 +205,10 @@ class IndexController extends Controller
             'address_type'  => 'required|in:home,office',
         ]);
         $user = auth()->user();
-       $fullAddress = $validated['landmark'] . ', ' . $validated['city'];
+        $fullAddress = $validated['landmark'] . ', ' . $validated['city'];
         $notes = 'Type: ' . $validated['address_type'];
- $user->address = $fullAddress;
-    
-    $user->save();
+        $user->address = $fullAddress;
+        $user->save();
         return view('frontend.payment', compact('validated', 'fullAddress', 'notes'));
     }
 
