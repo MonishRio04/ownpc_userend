@@ -99,7 +99,7 @@
                                     </div>
                                     <div class="col-12">
                                         <label for="inputProductType" class="form-label">Product Brand</label>
-                                        <select name="brand_id" class="form-select" id="inputProductType" required>
+                                        <select name="brand_id" class="form-select" id="inputProductType" >
                                             @foreach($brands as $brand)
                                             <option value="{{$brand->id}}">{{$brand->brand_name}}</option>
                                             @endforeach
