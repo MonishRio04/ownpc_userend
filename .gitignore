@@ -17,7 +17,10 @@
 /public/images
 /public/upload
 /public/storage
-/public
+/public/adminbackend
+/public/frontend
+/public/images
+/public/upload
 /storage/*.key
 /storage/pail
 /vendor
