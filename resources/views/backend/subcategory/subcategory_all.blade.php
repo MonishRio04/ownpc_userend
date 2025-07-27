@@ -33,7 +33,7 @@
                     <thead>
                         <tr>
                             <th>Sl.No</th>
-                            <th>Category Name</th>
+                            <!-- <th>Category Name</th> -->
                             <th>Sub Category Name</th>
                             <th>Action</th>
                         </tr>
@@ -42,7 +42,7 @@
                         @foreach($subcategories as $key=> $item)
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$item['category']['category_name']}}</td>
+                            <!-- <td>{{$item['category']['category_name']}}</td> -->
                             <td>{{$item->subcategory_name}}</td>
                             <td>
                                 <a href="{{route('edit.subcategory',$item->id)}}" class="btn btn-info">Edit</a>
