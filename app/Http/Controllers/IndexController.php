@@ -32,6 +32,11 @@ class IndexController extends Controller
         $data['wishlistedProductIds'] = $userId
             ? \App\Models\Wishlist::where('user_id', $userId)->pluck('product_id')->toArray()
             : [];
+        $data['new_products'] = Product::where('status', 1)
+            // ->where('created_at', '>=', now()->subDays(30)) 
+            ->orderBy('created_at', 'desc')
+            ->limit(12)
+            ->get();
         return view("frontend.index", $data);
     }
 
