@@ -36,46 +36,79 @@
             </span>
         </button>
     </div>
-    @foreach ($menu_categories as $category)
-    <div class="px-4 sm:px-6 lg:px-8">
-        <button id="goTopBtn" class="fixed bottom-6 right-6 text-orange-400 text-3xl font-bold z-50 hidden">
-            <i class="fa-solid fa-arrow-up-from-bracket"></i>
-        </button>
-        <h1 class="text-center text-2xl sm:text-3xl lg:text-4xl pt-8 sm:pt-12 lg:pt-16 dark:text-white">
-            {{$category->category_name}}</span>
-        </h1>
-        <div class="container mx-auto py-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            @foreach ($category->products as $index => $product)
-                <div class="bg-white dark:bg-gray-900 rounded shadow p-4 text-center relative group">
-                    <button
-                        class="wishlist-toggle absolute top-2 right-2 text-xl {{ in_array($product->id, $wishlistedProductIds) ? 'text-red-500' : 'text-gray-300' }}"
-                        data-product-id="{{ $product->id }}">
-                        <i class="fa fa-heart"></i>
-                    </button>
+    <section class="py-10 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Shop by Category</h2>
 
-                    <div class="relative">
-                        <img src="{{ asset($product->product_thambnail ?: 'images/pc.png') }}" alt="Product Image"
-                            class="mx-auto h-[150px] object-contain mb-3">
-                        <a href="{{ route('showproduct', $product->id) }}"
-                            class="absolute top-0 left-0 w-full h-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                            <button class="bg-[#196490] text-white px-3 py-2 rounded text-sm">Quick View</button>
-                        </a>
-                    </div>
-
-                    <h4 class="font-semibold text-sm text-gray-800 dark:text-white mb-1 truncate">
-                        {{ $product->product_name }}</h4>
-                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">₹{{ number_format($product->selling_price) }}
-                    </p>
-
-                    <button class="addToCartBtn bg-[#196490] text-white px-4 py-2 rounded text-sm"
-                        data-id="{{ $product->id }}" data-name="{{ $product->product_name }}"
-                        data-price="{{ $product->discount_price ?? $product->selling_price }}">
-                        Add to Cart
-                    </button>
-                </div>
-            @endforeach
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                @foreach ($categories as $category)
+                    <a href="{{ route('category.product', $category->id) }}"
+                        class="group block bg-gray-50 dark:bg-gray-800 rounded-xl overflow-hidden shadow hover:shadow-lg transition">
+                        <div class="relative">
+                            <img src="{{ asset($category->category_image ?? 'images/placeholder.png') }}"
+                                alt="{{ $category->category_name }}"
+                                class="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300">
+                        </div>
+                        <div class="p-4 text-center">
+                            <h3 class="text-sm font-semibold text-gray-700 dark:text-white truncate">
+                                {{ $category->category_name }}
+                            </h3>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
         </div>
-    </div>
+    </section>
+    @foreach ($menu_categories as $category)
+        <div class="px-4 sm:px-6 lg:px-8">
+            <button id="goTopBtn" class="fixed bottom-6 right-6 text-orange-400 text-3xl font-bold z-50 hidden">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            </button>
+            <h1 class="text-center text-2xl sm:text-3xl lg:text-4xl pt-8 sm:pt-12 lg:pt-16 dark:text-white">
+                {{ $category->category_name }}</span>
+            </h1>
+            <div class="container mx-auto py-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                @foreach ($category->products as $index => $product)
+                    <div class="bg-white dark:bg-gray-900 rounded shadow p-4 text-center relative group">
+                        <button
+                            class="wishlist-toggle absolute top-2 right-2 text-xl {{ in_array($product->id, $wishlistedProductIds) ? 'text-red-500' : 'text-gray-300' }}"
+                            data-product-id="{{ $product->id }}">
+                            <i class="fa fa-heart"></i>
+                        </button>
+
+                        <div class="relative">
+                            <img src="{{ asset($product->product_thambnail ?: 'images/pc.png') }}" alt="Product Image"
+                                class="mx-auto h-[150px] object-contain mb-3">
+                            <a href="{{ route('showproduct', $product->id) }}"
+                                class="absolute top-0 left-0 w-full h-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
+                                <button class="bg-[#0b1d54] text-white px-3 py-2 rounded text-sm">Quick View</button>
+                            </a>
+                        </div>
+
+                        <h4 class="font-semibold text-sm text-gray-800 dark:text-white mb-1 truncate">
+                            {{ $product->product_name }}</h4>
+                        @if ($product->discount_price)
+                            <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                                <span
+                                    class="text-red-500 font-semibold">₹{{ number_format($product->discount_price) }}</span>
+                                <span
+                                    class="line-through text-gray-400 ml-1">₹{{ number_format($product->selling_price) }}</span>
+                            </p>
+                        @else
+                            <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                                ₹{{ number_format($product->selling_price) }}
+                            </p>
+                        @endif
+
+                        <button class="addToCartBtn bg-[#0b1d54] w-full text-white px-4 py-2 rounded text-sm"
+                            data-id="{{ $product->id }}" data-name="{{ $product->product_name }}"
+                            data-price="{{ $product->discount_price ?? $product->selling_price }}">
+                            Add to Cart
+                        </button>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     @endforeach
 
     <div class="px-4 sm:px-6 lg:px-8">
@@ -100,16 +133,24 @@
                             class="mx-auto h-[150px] object-contain mb-3">
                         <a href="{{ route('showproduct', $product->id) }}"
                             class="absolute top-0 left-0 w-full h-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                            <button class="bg-[#196490] text-white px-3 py-2 rounded text-sm">Quick View</button>
+                            <button class="bg-[#0b1d54] text-white px-3 py-2 rounded text-sm">Quick View</button>
                         </a>
                     </div>
 
                     <h4 class="font-semibold text-sm text-gray-800 dark:text-white mb-1 truncate">
                         {{ $product->product_name }}</h4>
-                    <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">₹{{ number_format($product->selling_price) }}
-                    </p>
-
-                    <button class="addToCartBtn bg-[#196490] text-white px-4 py-2 rounded text-sm"
+                    @if ($product->discount_price)
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                            <span class="text-red-500 font-semibold">₹{{ number_format($product->discount_price) }}</span>
+                            <span
+                                class="line-through text-gray-400 ml-1">₹{{ number_format($product->selling_price) }}</span>
+                        </p>
+                    @else
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                            ₹{{ number_format($product->selling_price) }}
+                        </p>
+                    @endif
+                    <button class="addToCartBtn bg-[#0b1d54] w-full text-white px-4 py-2 rounded text-sm"
                         data-id="{{ $product->id }}" data-name="{{ $product->product_name }}"
                         data-price="{{ $product->discount_price ?? $product->selling_price }}">
                         Add to Cart
@@ -120,38 +161,6 @@
 
 
     </div>
-    <!-- Banner Section -->
-<section class="relative w-full bg-fixed bg-center bg-cover my-12 min-h-[400px]"
-    style="background-image: url('{{ asset('static_images/modern-stationary-collection-arrangement.jpg') }}');">
-    <div class="absolute inset-0 bg-black/20"></div>
-    <div class="relative container mx-auto h-full px-4">
-        <div class="flex flex-col sm:flex-row gap-6 pb-8 pt-[7rem] items-stretch justify-center h-full">
-
-            <!-- Card 1 -->
-            <div class="bg-white rounded-xl shadow-xl flex flex-col sm:flex-row-reverse w-full sm:w-1/2 overflow-hidden">
-                <img src="{{ asset('static_images/people-repairing-computer-chips.jpg') }}" alt="PC 1"
-                    class="w-full sm:w-1/2 object-cover" />
-                <div class="p-6 flex flex-col justify-center text-left sm:w-1/2">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Powerful Computers</h3>
-                    <p class="text-gray-600 text-sm">Top-tier performance machines built for speed and durability.</p>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="bg-white rounded-xl shadow-xl flex flex-col sm:flex-row-reverse w-full sm:w-1/2 overflow-hidden">
-                <img src="{{ asset('static_images/still-life-books-versus-technology.jpg') }}" alt="PC 2"
-                    class="w-full sm:w-1/2 object-cover" />
-                <div class="p-6 flex flex-col justify-center text-left sm:w-1/2">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Essential Hardware</h3>
-                    <p class="text-gray-600 text-sm">Latest components to upgrade or build your custom rig.</p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-
 @endsection
 
 @push('scripts')

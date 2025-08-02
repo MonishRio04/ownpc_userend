@@ -24,7 +24,7 @@ class CategoryController extends Controller
     public function toggleHome(Request $request)
     {
         $category = Category::findOrFail($request->category_id);
-        $category->add_to_homepage = $request->status;
+        $category->add_to_homepage = $request?->status?1:0;
         $category->save();
 
         $message = $request->status

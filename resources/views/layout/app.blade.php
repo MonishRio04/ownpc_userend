@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="{{asset('logo/logo_square1.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('logo/logo_sqr.png')}}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit&display=swap" rel="stylesheet">
@@ -94,11 +94,11 @@
         }
     </style>
 
-    <title>Shopping Mart</title>
+    <title>Ownpc | Build Your Custom PC</title>
     @stack('styles')
 </head>
 
-<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-all duration-300">
+<body class="bg-[#fafafa] text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-all duration-300">
 
     @include('layout.header')
 
