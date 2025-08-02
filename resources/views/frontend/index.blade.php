@@ -90,7 +90,7 @@
                         @if ($product->discount_price)
                             <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
                                 <span
-                                    class="text-red-500 font-semibold">₹{{ number_format($product->discount_price) }}</span>
+                                    class="text-red-500 font-semibold">₹{{ number_format((int)$product->discount_price) }}</span>
                                 <span
                                     class="line-through text-gray-400 ml-1">₹{{ number_format($product->selling_price) }}</span>
                             </p>
@@ -141,7 +141,7 @@
                         {{ $product->product_name }}</h4>
                     @if ($product->discount_price)
                         <p class="text-sm text-gray-600 dark:text-gray-300 mb-2">
-                            <span class="text-red-500 font-semibold">₹{{ number_format($product->discount_price) }}</span>
+                            <span class="text-red-500 font-semibold">₹{{ number_format((int)$product->discount_price) }}</span>
                             <span
                                 class="line-through text-gray-400 ml-1">₹{{ number_format($product->selling_price) }}</span>
                         </p>
