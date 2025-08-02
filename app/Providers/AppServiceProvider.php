@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         $menu_categories = Category::whereHas('subcategory.products')->where('add_to_homepage', true)
             ->with(['subcategory' => function ($query) {
                 $query->whereHas('products');
-            }])
+            },'products'])
             ->get();
 
         // Determine active category based on current route

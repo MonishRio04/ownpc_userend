@@ -38,9 +38,9 @@
 <hr class="border-gray-200 dark:border-gray-700">
 
 <!-- LOGO + SEARCH + ICONS -->
-<div class="container mx-auto py-6 px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="container mx-auto py-3 px-4 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
     <a href="/" class="text-2xl sm:text-3xl font-bold flex items-center gap-2">
-        <img src="{{ asset('logo/logo_rectangle1.png') }}" alt="Logo" class="h-16 sm:h-20 object-contain" />
+        <img src="{{ asset('logo/logo_rectangle1.png') }}" alt="Logo" class="h-14 object-contain" />
     </a>
 
     <form class="w-full sm:w-[50%] flex border border-gray-300 rounded overflow-hidden dark:border-gray-700">

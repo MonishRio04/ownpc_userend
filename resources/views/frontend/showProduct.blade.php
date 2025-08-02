@@ -7,10 +7,10 @@
         </button>
 
         <div class="relative w-full h-[300px] sm:h-[350px] md:h-[400px] bg-cover bg-center flex items-center px-4 sm:px-8 md:px-16"
-            style="background-image: url('{{ asset('images/3slider.jpg') }}');">
+            style="background-image: url('{{ asset('static_images/product_page.jpg') }}');">
             <div class="z-10 max-w-xl text-black dark:text-white space-y-2 sm:space-y-4">
                 <p class="text-lg sm:text-xl">
-                    <span class="text-2xl sm:text-3xl md:text-4xl font-bold">Product </span> single page
+                    <span class="text-2xl sm:text-3xl md:text-4xl font-bold">{{ $product->product_name }}</span> 
                 </p>
                 <p class="text-sm sm:text-base">
                     <a href="/" class="text-orange-400 font-bold">HOME</a>
