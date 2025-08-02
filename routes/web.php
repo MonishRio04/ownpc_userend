@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/all/category', 'AllCategory')->name('all.category');
         Route::get('/add/category', 'AddCategory')->name('add.category');
         Route::post('/store/category', 'StoreCategory')->name('store.category');
+        Route::post('/category/toggle-home','toggleHome')->name('category.toggleHome');
         Route::get('/edit/category/{id}', 'EditCategory')->name('edit.category');
         Route::post('/update/category', 'UpdateCategory')->name('update.category');
         Route::get('/delete/category/{id}', 'DeleteCategory')->name('delete.category');

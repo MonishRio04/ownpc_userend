@@ -17,38 +17,50 @@ class CategoryController extends Controller
         return view('backend.category.category_all', compact('categories'));
     }
 
-    public function AddCategory(){
+    public function AddCategory()
+    {
         return view('backend.category.category_add');
+    }
+    public function toggleHome(Request $request)
+    {
+        $category = Category::findOrFail($request->category_id);
+        $category->add_to_homepage = $request->status;
+        $category->save();
+
+        $message = $request->status
+            ? 'Category added to homepage successfully.'
+            : 'Category removed from homepage successfully.';
+        return response()->json(['message' => $message]);
     }
 
     public function storeCategory(Request $request)
     {
         $image = $request->file('category_image');
-    
+
         if ($image) {
-            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            $destinationPathThumbnail = public_path('upload/category');    
+            $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+            $destinationPathThumbnail = public_path('upload/category');
             if (!file_exists($destinationPathThumbnail)) {
                 mkdir($destinationPathThumbnail, 0755, true);
             }
-            $manager = new ImageManager(new GdDriver());            
+            $manager = new ImageManager(new GdDriver());
             $manager->read($image)
-                    ->resize(120, 120, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })
-                    ->save($destinationPathThumbnail.'/'.$name_gen);
-            $save_url = 'upload/category/'.$name_gen;
+                ->resize(120, 120, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save($destinationPathThumbnail . '/' . $name_gen);
+            $save_url = 'upload/category/' . $name_gen;
             Category::insert([
                 'category_name' => $request->category_name,
                 'category_slug' => strtolower(str_replace(' ', '-', $request->category_name)),
                 'category_image' => $save_url,
-            ]);    
+            ]);
             return redirect()->route('all.category')->with([
                 'message' => 'Category inserted successfully',
                 'alert-type' => 'success'
             ]);
         }
-    
+
         return back()->with([
             'message' => 'No image found',
             'alert-type' => 'error'
@@ -68,13 +80,13 @@ class CategoryController extends Controller
         if ($request->file('category_image')) {
             $image = $request->file('category_image');
             $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
-            $manager = new ImageManager(new GdDriver());            
+            $manager = new ImageManager(new GdDriver());
             $manager->read($image)
-                    ->resize(120, 120, function ($constraint) {
-                        $constraint->aspectRatio();
-                    })
-                    ->save('upload/category/'.$name_gen);
-            $save_url = 'upload/category/'.$name_gen;
+                ->resize(120, 120, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save('upload/category/' . $name_gen);
+            $save_url = 'upload/category/' . $name_gen;
             // Image::make($image)->resize(120,120)->save('upload/category/' . $name_gen);
             // $save_url = 'upload/category/'. $name_gen;
             if (file_exists($old_img)) {
@@ -84,7 +96,7 @@ class CategoryController extends Controller
                 'category_name' => $request->category_name,
                 'category_slug' => strtolower(str_replace(' ', '-', $request->category_name)),
                 'category_image' => $save_url,
-                'status'=>$request->status??1,
+                'status' => $request->status ?? 1,
             ]);
 
             $notification = array(
@@ -96,7 +108,7 @@ class CategoryController extends Controller
             Category::findOrFail($cat_id)->update([
                 'category_name' => $request->category_name,
                 'category_slug' => strtolower(str_replace(' ', '-', $request->category_name)),
-                'status'=>$request->status??1,
+                'status' => $request->status ?? 1,
             ]);
 
             $notification = array(
@@ -107,8 +119,9 @@ class CategoryController extends Controller
         }
     }
 
-    public function DeleteCategory($id){
-        $category = Category::findOrFail($id);        
+    public function DeleteCategory($id)
+    {
+        $category = Category::findOrFail($id);
         $img = $category->category_image;
         unlink($img);
         Category::findOrFail($id)->delete();

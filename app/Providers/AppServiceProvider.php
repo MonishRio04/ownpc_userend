@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
       View::composer('*', function ($view) {
         // Only fetch categories that have subcategories with products
-        $menu_categories = Category::whereHas('subcategory.products')
+        $menu_categories = Category::whereHas('subcategory.products')->where('add_to_homepage', true)
             ->with(['subcategory' => function ($query) {
                 $query->whereHas('products');
             }])
